@@ -1176,7 +1176,8 @@
             
             setTimeout(() => {
                 confirmLocationBtn.innerHTML = '<i class="fas fa-check"></i> Lokasi Dikonfirmasi';
-                confirmLocationBtn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+                confirmLocationBtn.style.background = 'linear-gradient(135deg, var(--coffee-dark), var(--coffee-medium))';
+                confirmLocationBtn.style.boxShadow = '0 6px 20px rgba(90, 62, 41, 0.4)';
                 
                 locationInfo.className = 'geo-info success';
                 locationInfo.innerHTML = '<i class="fas fa-map-marked-alt"></i> Lokasi usaha berhasil ditandai dan dikonfirmasi!';
@@ -1312,7 +1313,8 @@
                     coordinatesDisplay.style.display = 'none';
                     confirmLocationBtn.disabled = true;
                     confirmLocationBtn.innerHTML = '<i class="fas fa-check"></i> Konfirmasi Lokasi';
-                    confirmLocationBtn.style.background = 'linear-gradient(135deg, var(--coffee-medium), var(--coffee-dark))';
+                    confirmLocationBtn.style.background = 'linear-gradient(135deg, var(--coffee-dark), var(--coffee-medium))';
+                    confirmLocationBtn.style.boxShadow = '0 6px 20px rgba(90, 62, 41, 0.4)';
                     locationInfo.className = 'geo-info';
                     locationInfo.innerHTML = '<i class="fas fa-info-circle"></i> Tekan "Deteksi Lokasi Saya" untuk mencari koordinat otomatis';
                 }, 3000);
