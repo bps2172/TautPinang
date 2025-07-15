@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Pendataan Usaha - Tanjungpinang</title>
+    <title>Sistem Informasi Pendataan Kedai Kopi - Tanjungpinang</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -45,8 +46,15 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
         }
 
         .container {
@@ -78,7 +86,7 @@
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .form-subtitle {
@@ -145,7 +153,8 @@
             display: block;
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             border: 2px solid rgba(103, 116, 35, 0.2);
             border-radius: 12px;
             padding: 0.75rem 1rem;
@@ -155,7 +164,8 @@
             color: var(--coffee-dark);
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: var(--coffee-green);
             box-shadow: 0 0 0 0.2rem rgba(103, 116, 35, 0.25);
             background: white;
@@ -163,6 +173,12 @@
 
         .form-control::placeholder {
             color: rgba(138, 93, 61, 0.6);
+        }
+
+        .text-muted {
+            color: rgba(138, 93, 61, 0.7) !important;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
         }
 
         .btn-submit {
@@ -187,7 +203,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: all 0.5s ease;
         }
 
@@ -239,6 +255,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -249,15 +266,15 @@
             .form-title {
                 font-size: 2rem;
             }
-            
+
             .form-block {
                 padding: 1.5rem;
             }
-            
+
             .form-row {
                 flex-direction: column;
             }
-            
+
             .form-row .form-group {
                 min-width: 100%;
             }
@@ -283,6 +300,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -308,7 +326,7 @@
 
         /* Geo Tagging Styles */
         .geo-container {
-            background: linear-gradient(135deg, var(--coffee-cream), rgba(255,255,255,0.9));
+            background: linear-gradient(135deg, var(--coffee-cream), rgba(255, 255, 255, 0.9));
             border-radius: 15px;
             padding: 1.5rem;
             border: 2px solid rgba(103, 116, 35, 0.1);
@@ -322,7 +340,8 @@
             flex-wrap: wrap;
         }
 
-        .btn-geo, .btn-geo-confirm {
+        .btn-geo,
+        .btn-geo-confirm {
             background: linear-gradient(135deg, var(--coffee-green), var(--coffee-medium));
             color: white;
             border: none;
@@ -341,12 +360,14 @@
             background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-dark));
         }
 
-        .btn-geo:hover, .btn-geo-confirm:hover {
+        .btn-geo:hover,
+        .btn-geo-confirm:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(103, 116, 35, 0.35);
         }
 
-        .btn-geo:disabled, .btn-geo-confirm:disabled {
+        .btn-geo:disabled,
+        .btn-geo-confirm:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
@@ -357,8 +378,13 @@
         }
 
         @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .geo-info {
@@ -390,7 +416,7 @@
             overflow: hidden;
             border: 2px solid rgba(103, 116, 35, 0.2);
             margin-bottom: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         #map {
@@ -458,15 +484,17 @@
         }
 
         @keyframes markerPulse {
-            0% { 
+            0% {
                 box-shadow: 0 6px 15px rgba(90, 62, 41, 0.4);
                 background: linear-gradient(135deg, #677423, #8A5D3D);
             }
-            50% { 
+
+            50% {
                 box-shadow: 0 6px 15px rgba(90, 62, 41, 0.4), 0 0 0 10px rgba(103, 116, 35, 0.3);
                 background: linear-gradient(135deg, #8A5D3D, #677423);
             }
-            100% { 
+
+            100% {
                 box-shadow: 0 6px 15px rgba(90, 62, 41, 0.4);
                 background: linear-gradient(135deg, #677423, #8A5D3D);
             }
@@ -480,7 +508,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.8);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 20px;
@@ -492,7 +520,7 @@
         }
 
         .coordinates-display {
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             padding: 1rem;
             display: flex;
@@ -525,11 +553,12 @@
             .geo-controls {
                 flex-direction: column;
             }
-            
-            .btn-geo, .btn-geo-confirm {
+
+            .btn-geo,
+            .btn-geo-confirm {
                 width: 100%;
             }
-            
+
             .coordinates-display {
                 flex-direction: column;
                 gap: 1rem;
@@ -537,11 +566,12 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="form-header">
             <h1 class="form-title">
-                <i class="fas fa-coffee"></i> Formulir Pendataan Usaha
+                <i class="fas fa-coffee"></i> Sistem Informasi Pendataan Kedai Kopi
             </h1>
             <p class="form-subtitle">Kota Tanjungpinang - Provinsi Kepulauan Riau</p>
         </div>
@@ -553,37 +583,39 @@
                     <div class="block-icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    Data Lokasi Usaha
+                    Data Lokasi Kedai Kopi
                 </h3>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Kota</label>
+                        <input type="hidden" name="kode_kota" value="2172">
                         <input type="text" class="form-control" value="Tanjungpinang" readonly>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Kecamatan</label>
-                        <select class="form-select" id="kecamatan" required>
+                        <select class="form-select" id="kecamatan" name="kode_kecamatan" required>
                             <option value="">Pilih Kecamatan</option>
-                            <option value="Bukit Bestari">Bukit Bestari</option>
-                            <option value="Tanjungpinang Kota">Tanjungpinang Kota</option>
-                            <option value="Tanjungpinang Barat">Tanjungpinang Barat</option>
-                            <option value="Tanjungpinang Timur">Tanjungpinang Timur</option>
+                            <option value="010">Bukit Bestari</option>
+                            <option value="020">Tanjungpinang Timur</option>
+                            <option value="030">Tanjungpinang Kota</option>
+                            <option value="040">Tanjungpinang Barat</option>
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Kelurahan</label>
-                        <select class="form-select" id="kelurahan" required disabled>
+                        <select class="form-select" id="kelurahan" name="kode_kelurahan" required disabled>
                             <option value="">Pilih Kelurahan</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label">RT</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="rt" placeholder="001" min="1" max="999" required>
+                            <input type="number" class="form-control" id="rt" name="rt" placeholder="001"
+                                min="1" max="999" required>
                             <div class="input-icon">
                                 <i class="fas fa-hashtag"></i>
                             </div>
@@ -592,7 +624,8 @@
                     <div class="form-group">
                         <label class="form-label">RW</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="rw" placeholder="001" min="1" max="999" required>
+                            <input type="number" class="form-control" id="rw" name="rw" placeholder="001"
+                                min="1" max="999" required>
                             <div class="input-icon">
                                 <i class="fas fa-hashtag"></i>
                             </div>
@@ -601,29 +634,31 @@
                 </div>
             </div>
 
-            <!-- Blok 2: Data Usaha -->
+            <!-- Blok 2: Data Kedai Kopi -->
             <div class="form-block">
                 <h3 class="block-title">
                     <div class="block-icon">
-                        <i class="fas fa-store"></i>
+                        <i class="fas fa-coffee"></i>
                     </div>
-                    Data Usaha
+                    Data Kedai Kopi
                 </h3>
-                
+
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Nama Usaha</label>
+                        <label class="form-label">Nama Kedai Kopi</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="namaUsaha" placeholder="Masukkan nama usaha" required>
+                            <input type="text" class="form-control" id="namaUsaha" name="nama_kedai"
+                                placeholder="Masukkan nama kedai kopi" required>
                             <div class="input-icon">
-                                <i class="fas fa-store-alt"></i>
+                                <i class="fas fa-coffee"></i>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Alamat Usaha</label>
+                        <label class="form-label">Alamat Kedai</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="alamat" placeholder="Masukkan alamat lengkap" required>
+                            <input type="text" class="form-control" id="alamat" name="alamat"
+                                placeholder="Masukkan alamat lengkap" required>
                             <div class="input-icon">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
@@ -634,7 +669,7 @@
                 <!-- Geo Tagging Section -->
                 <div class="form-group">
                     <label class="form-label">
-                        <i class="fas fa-map-pin"></i> Lokasi Usaha (Geo Tagging)
+                        <i class="fas fa-map-pin"></i> Lokasi Kedai (Geo Tagging)
                     </label>
                     <div class="geo-container">
                         <div class="geo-controls">
@@ -646,12 +681,14 @@
                             </button>
                         </div>
                         <div class="geo-info" id="locationInfo">
-                            <i class="fas fa-info-circle"></i> Tekan "Deteksi Lokasi Saya" untuk mencari koordinat otomatis
+                            <i class="fas fa-info-circle"></i> Tekan "Deteksi Lokasi Saya" untuk mencari koordinat
+                            otomatis
                         </div>
                         <div class="map-container" id="mapContainer" style="display: none;">
                             <div id="map"></div>
                             <div class="map-overlay">
-                                <i class="fas fa-hand-paper"></i> Geser pin hijau atau klik peta untuk mengatur lokasi usaha
+                                <i class="fas fa-hand-paper"></i> Geser pin hijau atau klik peta untuk mengatur lokasi
+                                kedai
                             </div>
                         </div>
                         <div class="coordinates-display" id="coordinatesDisplay" style="display: none;">
@@ -666,12 +703,13 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Omzet Bulanan</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="omzet" placeholder="Rp 0" required>
+                            <input type="text" class="form-control" id="omzet" name="omzet"
+                                placeholder="Rp 0" required>
                             <div class="input-icon">
                                 <i class="fas fa-money-bill-wave"></i>
                             </div>
@@ -680,7 +718,8 @@
                     <div class="form-group">
                         <label class="form-label">Jumlah Tenaga Kerja</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="jumlahTK" placeholder="0" min="0" required>
+                            <input type="number" class="form-control" id="jumlahTK" name="jumlah_tk"
+                                placeholder="0" min="0" required>
                             <div class="input-icon">
                                 <i class="fas fa-users"></i>
                             </div>
@@ -697,24 +736,29 @@
                     </div>
                     Data Tenant
                 </h3>
-                
+
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Jumlah Tenant</label>
+                        <label class="form-label">Jumlah Tenant Milik Sendiri</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="jumlahTenant" placeholder="0" min="0" required>
+                            <input type="number" class="form-control" id="tenantMilikSendiri"
+                                name="tenant_milik_sendiri" placeholder="0" min="0" required>
                             <div class="input-icon">
-                                <i class="fas fa-store"></i>
+                                <i class="fas fa-home"></i>
                             </div>
                         </div>
+                        <small class="text-muted">Masukkan 0 jika tidak ada</small>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Status Tenant</label>
-                        <select class="form-select" id="statusTenant" required>
-                            <option value="">Pilih Status</option>
-                            <option value="Milik Sendiri">Milik Sendiri</option>
-                            <option value="Sewa">Sewa</option>
-                        </select>
+                        <label class="form-label">Jumlah Tenant Sewa</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="tenantSewa" name="tenant_sewa"
+                                placeholder="0" min="0" required>
+                            <div class="input-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                        </div>
+                        <small class="text-muted">Masukkan 0 jika tidak ada</small>
                     </div>
                 </div>
 
@@ -722,10 +766,11 @@
                 <div class="conditional-field" id="biayaSewaField" style="display: none;">
                     <div class="form-group">
                         <label class="form-label">
-                            <i class="fas fa-dollar-sign"></i> Biaya Sewa (Per Bulan)
+                            <i class="fas fa-money-bill-wave"></i> Biaya Sewa Tenant (Per Bulan)
                         </label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="biayaSewa" placeholder="Rp 0">
+                            <input type="text" class="form-control" id="biayaSewa" name="biaya_sewa"
+                                placeholder="Rp 0">
                             <div class="input-icon">
                                 <i class="fas fa-money-check-alt"></i>
                             </div>
@@ -742,10 +787,11 @@
                     </div>
                     Catatan Tambahan
                 </h3>
-                
+
                 <div class="form-group">
                     <label class="form-label">Catatan</label>
-                    <textarea class="form-control" id="catatan" rows="4" placeholder="Masukkan catatan tambahan (opsional)"></textarea>
+                    <textarea class="form-control" id="catatan" name="catatan" rows="4"
+                        placeholder="Masukkan catatan tambahan (opsional)"></textarea>
                 </div>
             </div>
 
@@ -765,33 +811,87 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Data kelurahan berdasarkan kecamatan
+        // Data kelurahan berdasarkan kecamatan dengan kode yang benar
         const kelurahanData = {
-            "Bukit Bestari": [
-                "Bukit Bestari",
-                "Tanjung Ayun Sakti",
-                "Sei Jang",
-                "Kampung Bulang",
-                "Kawal"
+            "010": [ // Bukit Bestari
+                {
+                    kode: "001",
+                    nama: "Dompak"
+                },
+                {
+                    kode: "002",
+                    nama: "Tanjungpinang Timur"
+                },
+                {
+                    kode: "003",
+                    nama: "Tanjung Ayun Sakti"
+                },
+                {
+                    kode: "004",
+                    nama: "Sei Jang"
+                },
+                {
+                    kode: "005",
+                    nama: "Tanjung Unggat"
+                }
             ],
-            "Tanjungpinang Kota": [
-                "Centrepoint",
-                "Tj. Pinang Kota",
-                "Kampung Baru",
-                "Senggarang",
-                "Melayu Kota Piring"
+            "020": [ // Tanjungpinang Timur
+                {
+                    kode: "001",
+                    nama: "Batu Sembilan"
+                },
+                {
+                    kode: "002",
+                    nama: "Melayu Kota Piring"
+                },
+                {
+                    kode: "003",
+                    nama: "Air Raja"
+                },
+                {
+                    kode: "004",
+                    nama: "Pinang Kencana"
+                },
+                {
+                    kode: "005",
+                    nama: "Kampung Bulang"
+                }
             ],
-            "Tanjungpinang Barat": [
-                "Dompak",
-                "Batu IX",
-                "Batu X",
-                "Air Raja"
+            "030": [ // Tanjungpinang Kota
+                {
+                    kode: "001",
+                    nama: "Tanjungpinang Kota"
+                },
+                {
+                    kode: "002",
+                    nama: "Penyengat"
+                },
+                {
+                    kode: "003",
+                    nama: "Kampung Bugis"
+                },
+                {
+                    kode: "004",
+                    nama: "Senggarang"
+                }
             ],
-            "Tanjungpinang Timur": [
-                "Pinang Kencana",
-                "Sebong Lagoi",
-                "Tj. Unggat",
-                "Batu Sembilan"
+            "040": [ // Tanjungpinang Barat
+                {
+                    kode: "001",
+                    nama: "Tanjungpinang Barat"
+                },
+                {
+                    kode: "002",
+                    nama: "Kemboja"
+                },
+                {
+                    kode: "003",
+                    nama: "Kampung Baru"
+                },
+                {
+                    kode: "004",
+                    nama: "Bukit Cermin"
+                }
             ]
         };
 
@@ -799,8 +899,8 @@
         const kecamatanSelect = document.getElementById('kecamatan');
         const kelurahanSelect = document.getElementById('kelurahan');
         const omzetInput = document.getElementById('omzet');
+        const tenantSewaInput = document.getElementById('tenantSewa');
         const biayaSewaInput = document.getElementById('biayaSewa');
-        const statusTenantSelect = document.getElementById('statusTenant');
         const biayaSewaField = document.getElementById('biayaSewaField');
         const businessForm = document.getElementById('businessForm');
         const successMessage = document.getElementById('successMessage');
@@ -827,11 +927,11 @@
                 map.remove();
                 map = null;
             }
-            
+
             // Initialize map centered on Tanjungpinang if no coordinates provided
             const defaultLat = lat || 0.9171;
             const defaultLng = lng || 104.4448;
-            
+
             map = L.map('map', {
                 center: [defaultLat, defaultLng],
                 zoom: lat ? 16 : 13,
@@ -866,7 +966,7 @@
             // Show initial popup with instructions
             marker.bindPopup(`
                 <div style="text-align: center; min-width: 200px;">
-                    <strong style="color: #5A3E29;">📍 Lokasi Usaha</strong><br>
+                    <strong style="color: #5A3E29;">☕ Lokasi Kedai Kopi</strong><br>
                     <small style="color: #8A5D3D;">Geser pin ini untuk mengatur lokasi</small><br>
                     <small style="color: #677423;">Lat: ${defaultLat.toFixed(6)}<br>
                     Lng: ${defaultLng.toFixed(6)}</small>
@@ -897,11 +997,12 @@
                 };
                 updateCoordinates();
                 updateMarkerPopup();
-                
+
                 // Reset visual feedback
-                e.target.getElement().style.transform = e.target.getElement().style.transform.replace(' scale(1.2)', '');
+                e.target.getElement().style.transform = e.target.getElement().style.transform.replace(' scale(1.2)',
+                    '');
                 e.target.getElement().style.zIndex = 'auto';
-                
+
                 // Show success animation
                 e.target.getElement().classList.add('marker-active');
             });
@@ -913,13 +1014,13 @@
                     lat: position.lat,
                     lng: position.lng
                 };
-                
+
                 // Animate marker movement
                 marker.setLatLng([position.lat, position.lng]);
-                
+
                 updateCoordinates();
                 updateMarkerPopup();
-                
+
                 // Add pulse animation
                 marker.getElement().classList.remove('marker-active');
                 setTimeout(() => {
@@ -941,7 +1042,7 @@
             if (marker && selectedLocation) {
                 marker.bindPopup(`
                     <div style="text-align: center; min-width: 200px;">
-                        <strong style="color: #5A3E29;">📍 Lokasi Usaha</strong><br>
+                        <strong style="color: #5A3E29;">☕ Lokasi Kedai Kopi</strong><br>
                         <small style="color: #28a745; font-weight: 500;">✓ Pin berhasil dipindah</small><br>
                         <small style="color: #677423;">Lat: ${selectedLocation.lat.toFixed(6)}<br>
                         Lng: ${selectedLocation.lng.toFixed(6)}</small>
@@ -954,15 +1055,15 @@
         function getCurrentLocation() {
             getCurrentLocationBtn.disabled = true;
             getCurrentLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencari Lokasi...';
-            
+
             locationInfo.className = 'geo-info';
             locationInfo.innerHTML = '<i class="fas fa-satellite-dish"></i> Mendeteksi lokasi terbaru...';
-            
+
             if (!navigator.geolocation) {
                 showLocationError('Geolocation tidak didukung oleh browser ini.');
                 return;
             }
-            
+
             // FORCE clear any cached position - multiple methods to ensure fresh GPS
             if ('geolocation' in navigator) {
                 // Method 1: Clear any existing watch
@@ -970,36 +1071,36 @@
                     navigator.geolocation.clearWatch(window.geoWatchId);
                     window.geoWatchId = null;
                 }
-                
+
                 // Method 2: Use high accuracy with zero cache
                 const options = {
                     enableHighAccuracy: true,
                     timeout: 20000,
-                    maximumAge: 0  // NEVER use cache
+                    maximumAge: 0 // NEVER use cache
                 };
-                
+
                 // Method 3: Add timestamp to force new request
                 console.log('🌍 Requesting fresh GPS location at:', new Date().toISOString());
-                
+
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         const timestamp = new Date(position.timestamp);
                         console.log('📍 GPS Response received at:', timestamp.toISOString());
                         console.log('📊 GPS Accuracy:', position.coords.accuracy + 'm');
-                        
+
                         const newLocation = {
                             lat: position.coords.latitude,
                             lng: position.coords.longitude,
                             accuracy: position.coords.accuracy,
                             timestamp: position.timestamp
                         };
-                        
+
                         // Check if this is actually a new location
-                        if (currentLocation && 
-                            Math.abs(currentLocation.lat - newLocation.lat) < 0.00001 && 
+                        if (currentLocation &&
+                            Math.abs(currentLocation.lat - newLocation.lat) < 0.00001 &&
                             Math.abs(currentLocation.lng - newLocation.lng) < 0.00001 &&
                             currentLocation.timestamp === newLocation.timestamp) {
-                            
+
                             // Same location detected, try one more time with different method
                             console.log('⚠️ Same location detected, trying alternative method...');
                             setTimeout(() => {
@@ -1007,29 +1108,31 @@
                             }, 1000);
                             return;
                         }
-                        
+
                         currentLocation = newLocation;
-                        selectedLocation = { ...newLocation };
-                        
+                        selectedLocation = {
+                            ...newLocation
+                        };
+
                         // If map already exists, update it to new location
                         if (map && marker) {
                             console.log('🗺️ Updating existing map to new location');
-                            
+
                             // Smooth animation to new position
                             map.setView([newLocation.lat, newLocation.lng], 17, {
                                 animate: true,
                                 duration: 1.5
                             });
-                            
+
                             // Update marker position with animation
                             marker.setLatLng([newLocation.lat, newLocation.lng]);
-                            
+
                             // Add visual feedback
                             marker.getElement().classList.remove('marker-active');
                             setTimeout(() => {
                                 marker.getElement().classList.add('marker-active');
                             }, 100);
-                            
+
                             updateCoordinates();
                             updateMarkerPopup();
                             marker.openPopup();
@@ -1038,7 +1141,7 @@
                             // Initialize map for first time
                             showMap();
                         }
-                        
+
                         showLocationSuccess();
                     },
                     (error) => {
@@ -1058,7 +1161,7 @@
                                 errorMessage += 'Terjadi kesalahan yang tidak diketahui.';
                         }
                         showLocationError(errorMessage);
-                        
+
                         // Show map with default Tanjungpinang location if not shown yet
                         if (!map) {
                             showMap();
@@ -1072,13 +1175,13 @@
         // Alternative GPS method if first attempt returns cached result
         function getLocationAlternative() {
             console.log('🔄 Trying alternative GPS method...');
-            
+
             const options = {
                 enableHighAccuracy: true,
                 timeout: 25000,
                 maximumAge: 0
             };
-            
+
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     console.log('🎯 Alternative GPS successful');
@@ -1088,10 +1191,12 @@
                         accuracy: position.coords.accuracy,
                         timestamp: position.timestamp
                     };
-                    
+
                     currentLocation = newLocation;
-                    selectedLocation = { ...newLocation };
-                    
+                    selectedLocation = {
+                        ...newLocation
+                    };
+
                     if (map && marker) {
                         map.setView([newLocation.lat, newLocation.lng], 17, {
                             animate: true,
@@ -1106,7 +1211,7 @@
                         updateMarkerPopup();
                         marker.openPopup();
                     }
-                    
+
                     showLocationSuccess();
                 },
                 (error) => {
@@ -1121,10 +1226,11 @@
         function showLocationSuccess() {
             getCurrentLocationBtn.disabled = false;
             getCurrentLocationBtn.innerHTML = '<i class="fas fa-crosshairs"></i> Deteksi Ulang';
-            
+
             locationInfo.className = 'geo-info success';
-            locationInfo.innerHTML = '<i class="fas fa-check-circle"></i> Lokasi berhasil ditemukan! Klik peta atau geser pin untuk mengatur posisi.';
-            
+            locationInfo.innerHTML =
+                '<i class="fas fa-check-circle"></i> Lokasi berhasil ditemukan! Klik peta atau geser pin untuk mengatur posisi.';
+
             confirmLocationBtn.disabled = false;
         }
 
@@ -1132,10 +1238,11 @@
         function showLocationError(message) {
             getCurrentLocationBtn.disabled = false;
             getCurrentLocationBtn.innerHTML = '<i class="fas fa-crosshairs"></i> Coba Lagi';
-            
+
             locationInfo.className = 'geo-info error';
-            locationInfo.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ' + message + ' Menampilkan peta Tanjungpinang.';
-            
+            locationInfo.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ' + message +
+                ' Menampilkan peta Tanjungpinang.';
+
             confirmLocationBtn.disabled = false;
         }
 
@@ -1143,16 +1250,16 @@
         function showMap() {
             mapContainer.style.display = 'block';
             coordinatesDisplay.style.display = 'flex';
-            
+
             // Add animation
             mapContainer.style.animation = 'slideIn 0.5s ease';
-            
+
             // Initialize map with current location or default
             const lat = selectedLocation ? selectedLocation.lat : null;
             const lng = selectedLocation ? selectedLocation.lng : null;
-            
+
             initializeMap(lat, lng);
-            
+
             // Invalidate size after animation
             setTimeout(() => {
                 map.invalidateSize();
@@ -1170,18 +1277,20 @@
         // Confirm location
         function confirmLocation() {
             if (!selectedLocation) return;
-            
+
             confirmLocationBtn.disabled = true;
             confirmLocationBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
-            
+
             setTimeout(() => {
                 confirmLocationBtn.innerHTML = '<i class="fas fa-check"></i> Lokasi Dikonfirmasi';
-                confirmLocationBtn.style.background = 'linear-gradient(135deg, var(--coffee-dark), var(--coffee-medium))';
+                confirmLocationBtn.style.background =
+                    'linear-gradient(135deg, var(--coffee-dark), var(--coffee-medium))';
                 confirmLocationBtn.style.boxShadow = '0 6px 20px rgba(90, 62, 41, 0.4)';
-                
+
                 locationInfo.className = 'geo-info success';
-                locationInfo.innerHTML = '<i class="fas fa-map-marked-alt"></i> Lokasi usaha berhasil ditandai dan dikonfirmasi!';
-                
+                locationInfo.innerHTML =
+                    '<i class="fas fa-map-marked-alt"></i> Lokasi kedai kopi berhasil ditandai dan dikonfirmasi!';
+
                 // Add celebration effect to marker
                 if (marker) {
                     marker.bindPopup(`
@@ -1192,28 +1301,28 @@
                         </div>
                     `).openPopup();
                 }
-                
+
                 // Add to form data
                 const hiddenLatInput = document.createElement('input');
                 hiddenLatInput.type = 'hidden';
                 hiddenLatInput.name = 'latitude';
                 hiddenLatInput.value = selectedLocation.lat;
-                
+
                 const hiddenLngInput = document.createElement('input');
                 hiddenLngInput.type = 'hidden';
                 hiddenLngInput.name = 'longitude';
                 hiddenLngInput.value = selectedLocation.lng;
-                
+
                 // Remove existing hidden inputs if any
                 const existingLatInput = document.querySelector('input[name="latitude"]');
                 const existingLngInput = document.querySelector('input[name="longitude"]');
-                
+
                 if (existingLatInput) existingLatInput.remove();
                 if (existingLngInput) existingLngInput.remove();
-                
+
                 businessForm.appendChild(hiddenLatInput);
                 businessForm.appendChild(hiddenLngInput);
-                
+
             }, 1000);
         }
 
@@ -1221,11 +1330,11 @@
         getCurrentLocationBtn.addEventListener('click', getCurrentLocation);
         confirmLocationBtn.addEventListener('click', confirmLocation);
 
-        // Handle status tenant change to show/hide biaya sewa field
-        statusTenantSelect.addEventListener('change', function() {
-            const selectedStatus = this.value;
-            
-            if (selectedStatus === 'Sewa') {
+        // Handle tenant sewa change to show/hide biaya sewa field
+        tenantSewaInput.addEventListener('input', function() {
+            const jumlahTenantSewa = parseInt(this.value) || 0;
+
+            if (jumlahTenantSewa > 0) {
                 biayaSewaField.style.display = 'block';
                 biayaSewaField.classList.add('show');
                 biayaSewaInput.required = true;
@@ -1241,16 +1350,16 @@
         kecamatanSelect.addEventListener('change', function() {
             const selectedKecamatan = this.value;
             kelurahanSelect.innerHTML = '<option value="">Pilih Kelurahan</option>';
-            
+
             if (selectedKecamatan && kelurahanData[selectedKecamatan]) {
                 kelurahanSelect.disabled = false;
                 kelurahanData[selectedKecamatan].forEach(kelurahan => {
                     const option = document.createElement('option');
-                    option.value = kelurahan;
-                    option.textContent = kelurahan;
+                    option.value = kelurahan.kode;
+                    option.textContent = kelurahan.nama;
                     kelurahanSelect.appendChild(option);
                 });
-                
+
                 // Add animation
                 kelurahanSelect.style.animation = 'slideIn 0.3s ease';
             } else {
@@ -1258,14 +1367,32 @@
             }
         });
 
-        // Format currency inputs (omzet and biaya sewa)
+        // Format currency inputs with thousands separator
         function formatCurrency(input) {
             input.addEventListener('input', function() {
+                // Remove all non-digit characters
                 let value = this.value.replace(/[^\d]/g, '');
+
                 if (value) {
-                    value = parseInt(value).toLocaleString('id-ID');
-                    this.value = 'Rp ' + value;
+                    // Convert to number and format with thousands separator
+                    const numericValue = parseInt(value);
+                    const formattedValue = numericValue.toLocaleString('id-ID');
+                    this.value = 'Rp ' + formattedValue;
+                } else {
+                    this.value = '';
                 }
+            });
+
+            // Handle paste event
+            input.addEventListener('paste', function(e) {
+                setTimeout(() => {
+                    let value = this.value.replace(/[^\d]/g, '');
+                    if (value) {
+                        const numericValue = parseInt(value);
+                        const formattedValue = numericValue.toLocaleString('id-ID');
+                        this.value = 'Rp ' + formattedValue;
+                    }
+                }, 10);
             });
         }
 
@@ -1275,26 +1402,44 @@
         // Handle form submission
         businessForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const submitBtn = document.querySelector('.btn-submit');
             const loadingSpinner = document.querySelector('.loading-spinner');
-            
+
             // Show loading state
             submitBtn.disabled = true;
             loadingSpinner.style.display = 'inline-block';
-            
+
+            // Get form data and extract numeric values from formatted currency
+            const formData = new FormData(this);
+
+            // Extract numeric value from formatted currency inputs
+            const omzetNumeric = omzetInput.value.replace(/[^\d]/g, '');
+            const biayaSewaNumeric = biayaSewaInput.value.replace(/[^\d]/g, '');
+
+            // Update form data with numeric values
+            if (omzetNumeric) formData.set('omzet', omzetNumeric);
+            if (biayaSewaNumeric) formData.set('biaya_sewa', biayaSewaNumeric);
+
+            console.log('Data yang akan dikirim:');
+            for (let [key, value] of formData.entries()) {
+                console.log(key + ': ' + value);
+            }
+
             // Simulate API call
             setTimeout(() => {
                 // Hide loading state
                 submitBtn.disabled = false;
                 loadingSpinner.style.display = 'none';
-                
+
                 // Show success message
                 successMessage.style.display = 'block';
-                
+
                 // Scroll to success message
-                successMessage.scrollIntoView({ behavior: 'smooth' });
-                
+                successMessage.scrollIntoView({
+                    behavior: 'smooth'
+                });
+
                 // Reset form after 3 seconds
                 setTimeout(() => {
                     businessForm.reset();
@@ -1303,7 +1448,7 @@
                     biayaSewaField.style.display = 'none';
                     biayaSewaInput.required = false;
                     successMessage.style.display = 'none';
-                    
+
                     // Reset geo tagging
                     if (map) {
                         map.remove();
@@ -1313,10 +1458,12 @@
                     coordinatesDisplay.style.display = 'none';
                     confirmLocationBtn.disabled = true;
                     confirmLocationBtn.innerHTML = '<i class="fas fa-check"></i> Konfirmasi Lokasi';
-                    confirmLocationBtn.style.background = 'linear-gradient(135deg, var(--coffee-dark), var(--coffee-medium))';
-                    confirmLocationBtn.style.boxShadow = '0 6px 20px rgba(90, 62, 41, 0.4)';
+                    confirmLocationBtn.style.background =
+                        'linear-gradient(135deg, var(--coffee-medium), var(--coffee-dark))';
+                    confirmLocationBtn.style.boxShadow = '0 4px 12px rgba(103, 116, 35, 0.25)';
                     locationInfo.className = 'geo-info';
-                    locationInfo.innerHTML = '<i class="fas fa-info-circle"></i> Tekan "Deteksi Lokasi Saya" untuk mencari koordinat otomatis';
+                    locationInfo.innerHTML =
+                        '<i class="fas fa-info-circle"></i> Tekan "Deteksi Lokasi Saya" untuk mencari koordinat otomatis';
                 }, 3000);
             }, 2000);
         });
@@ -1327,7 +1474,7 @@
                 this.parentElement.parentElement.style.transform = 'scale(1.02)';
                 this.parentElement.parentElement.style.transition = 'transform 0.2s ease';
             });
-            
+
             input.addEventListener('blur', function() {
                 this.parentElement.parentElement.style.transform = 'scale(1)';
             });
@@ -1340,4 +1487,5 @@
         });
     </script>
 </body>
+
 </html>
