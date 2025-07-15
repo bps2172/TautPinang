@@ -614,22 +614,24 @@
                     <div class="form-group">
                         <label class="form-label">RT</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="rt" name="rt" placeholder="001"
-                                min="1" max="999" required>
+                            <input type="text" class="form-control" id="rt" name="rt" placeholder="001"
+                                maxlength="3" pattern="[0-9]{3}" required>
                             <div class="input-icon">
                                 <i class="fas fa-hashtag"></i>
                             </div>
                         </div>
+                        <small class="text-muted">Format: 001, 012, 123</small>
                     </div>
                     <div class="form-group">
                         <label class="form-label">RW</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" id="rw" name="rw" placeholder="001"
-                                min="1" max="999" required>
+                            <input type="text" class="form-control" id="rw" name="rw" placeholder="001"
+                                maxlength="3" pattern="[0-9]{3}" required>
                             <div class="input-icon">
                                 <i class="fas fa-hashtag"></i>
                             </div>
                         </div>
+                        <small class="text-muted">Format: 001, 012, 123</small>
                     </div>
                 </div>
             </div>
@@ -775,6 +777,7 @@
                                 <i class="fas fa-money-check-alt"></i>
                             </div>
                         </div>
+                        <small class="text-muted">Contoh: 3.000.000 akan tampil sebagai Rp 3.000.000</small>
                     </div>
                 </div>
             </div>
@@ -898,6 +901,8 @@
         // Element references
         const kecamatanSelect = document.getElementById('kecamatan');
         const kelurahanSelect = document.getElementById('kelurahan');
+        const rtInput = document.getElementById('rt');
+        const rwInput = document.getElementById('rw');
         const omzetInput = document.getElementById('omzet');
         const tenantSewaInput = document.getElementById('tenantSewa');
         const biayaSewaInput = document.getElementById('biayaSewa');
@@ -1399,9 +1404,84 @@
         formatCurrency(omzetInput);
         formatCurrency(biayaSewaInput);
 
+        // Format RT/RW to 3-digit with leading zeros
+        function formatRTRW(input) {
+            // Only allow numbers input
+            input.addEventListener('input', function(e) {
+                // Remove all non-digit characters
+                let value = this.value.replace(/[^\d]/g, '');
+
+                // Limit to 3 characters
+                if (value.length > 3) {
+                    value = value.substring(0, 3);
+                }
+
+                this.value = value;
+            });
+
+            // Format to 3-digit when user loses focus
+            input.addEventListener('blur', function() {
+                let value = this.value.replace(/[^\d]/g, '');
+
+                if (value) {
+                    // Convert to number and validate range (1-999)
+                    const numValue = parseInt(value);
+                    if (numValue >= 1 && numValue <= 999) {
+                        // Format to 3-digit with leading zeros
+                        this.value = numValue.toString().padStart(3, '0');
+                    } else if (numValue === 0) {
+                        this.value = '001'; // Default to 001 if user enters 0
+                    } else {
+                        this.value = '999'; // Max value if over 999
+                    }
+                } else {
+                    this.value = ''; // Keep empty if no input
+                }
+            });
+
+            // Handle paste
+            input.addEventListener('paste', function(e) {
+                setTimeout(() => {
+                    let value = this.value.replace(/[^\d]/g, '');
+                    if (value.length > 3) {
+                        value = value.substring(0, 3);
+                    }
+                    this.value = value;
+                }, 10);
+            });
+
+            // Prevent non-numeric characters from being typed
+            input.addEventListener('keypress', function(e) {
+                // Allow only numbers, backspace, delete, tab, enter
+                if (!/[\d]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter'].includes(e.key)) {
+                    e.preventDefault();
+                }
+            });
+        }
+
+        formatRTRW(rtInput);
+        formatRTRW(rwInput);
+
         // Handle form submission
         businessForm.addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // Validate RT/RW format before submission
+            if (rtInput.value && rtInput.value.length < 3) {
+                let rtValue = rtInput.value.replace(/[^\d]/g, '');
+                if (rtValue) {
+                    const numValue = parseInt(rtValue);
+                    rtInput.value = numValue.toString().padStart(3, '0');
+                }
+            }
+
+            if (rwInput.value && rwInput.value.length < 3) {
+                let rwValue = rwInput.value.replace(/[^\d]/g, '');
+                if (rwValue) {
+                    const numValue = parseInt(rwValue);
+                    rwInput.value = numValue.toString().padStart(3, '0');
+                }
+            }
 
             const submitBtn = document.querySelector('.btn-submit');
             const loadingSpinner = document.querySelector('.loading-spinner');
@@ -1447,6 +1527,11 @@
                     kelurahanSelect.innerHTML = '<option value="">Pilih Kelurahan</option>';
                     biayaSewaField.style.display = 'none';
                     biayaSewaInput.required = false;
+
+                    // Reset RT/RW placeholders
+                    rtInput.placeholder = '001';
+                    rwInput.placeholder = '001';
+
                     successMessage.style.display = 'none';
 
                     // Reset geo tagging
