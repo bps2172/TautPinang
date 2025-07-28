@@ -63,6 +63,7 @@
             filter: blur(40px);
             opacity: 0.6;
             animation: float 20s infinite ease-in-out;
+            z-index: 0;
         }
         
         .orb1 {
@@ -169,7 +170,7 @@
             }
         }
         
-        /* Generate 20 particles */
+        /* Generate 20 particles with varied properties */
         .particle:nth-child(1) { left: 5%; animation-delay: 0s; animation-duration: 8s; width: 3px; height: 3px; }
         .particle:nth-child(2) { left: 10%; animation-delay: 0.5s; animation-duration: 10s; width: 5px; height: 5px; }
         .particle:nth-child(3) { left: 15%; animation-delay: 1s; animation-duration: 11s; width: 4px; height: 4px; }
@@ -449,6 +450,7 @@
         .link-item:nth-child(7) { animation-delay: 0.7s; }
         .link-item:nth-child(8) { animation-delay: 0.8s; }
         .link-item:nth-child(9) { animation-delay: 0.9s; }
+        .link-item:nth-child(10) { animation-delay: 1.0s; }
         
         /* Mobile responsiveness */
         @media (max-width: 640px) {
@@ -655,6 +657,22 @@
                     <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                 </svg>
                 <span class="link-text">Posttest</span>
+                <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+            </a>
+            
+            <a href="https://drive.google.com/file/d/1k2NscAoDLl-rNVU8VMQdR05cRBjYVgA5/view?usp=sharing" 
+               target="_blank" 
+               class="link-item link-material">
+                <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="#FFD700" stroke-width="2.5">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    <line x1="12" y1="6" x2="16" y2="6"></line>
+                    <line x1="12" y1="10" x2="16" y2="10"></line>
+                </svg>
+                <span class="link-text">Buku Pedoman</span>
                 <svg class="link-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <line x1="7" y1="17" x2="17" y2="7"></line>
                     <polyline points="7 7 17 7 17 17"></polyline>
