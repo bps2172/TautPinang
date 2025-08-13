@@ -145,6 +145,73 @@
         .repo-info strong {
             color: #333;
         }
+
+        .file-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #28a745;
+            transition: all 0.3s ease;
+        }
+
+        .file-info.invalid {
+            border-left-color: #dc3545;
+            background: #fff5f5;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        @media (min-width: 480px) {
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.2s ease;
+        }
+
+        .info-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-weight: 600;
+            font-size: 0.95rem;
+            word-break: break-all;
+            transition: color 0.2s ease;
+        }
+
+        .info-value.valid {
+            color: #28a745;
+        }
+
+        .info-value.invalid {
+            color: #dc3545;
+        }
+
+        .info-value.pending {
+            color: #ffc107;
+        }
     </style>
 </head>
 <body>
@@ -169,21 +236,9 @@
             </div>
 
             <div class="form-group">
-                <label for="filename">Nama File (tanpa .html)</label>
-                <input type="text" id="filename" required placeholder="contoh: halaman-baru" pattern="[a-zA-Z0-9-_]+">
-                <div class="help-text">
-                    Hanya huruf, angka, tanda hubung (-) dan underscore (_). File akan disimpan sebagai .html
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="title">Judul Halaman</label>
-                <input type="text" id="title" required placeholder="Contoh: Linktree BPS Tanjungpinang">
-            </div>
-
-            <div class="form-group">
-                <label for="content">Konten HTML</label>
-                <textarea id="content" required placeholder="Masukkan konten HTML Anda di sini..."><!DOCTYPE html>
+                <label for="content">Konten HTML dari Laravel</label>
+                <textarea id="content" required placeholder="Paste konten HTML lengkap dari aplikasi Laravel di sini..."><!-- filename: contoh-halaman -->
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -242,7 +297,22 @@
 </body>
 </html></textarea>
                 <div class="help-text">
-                    Template dasar sudah disediakan. Anda bisa mengedit sesuai kebutuhan.
+                    <strong>Format yang dibutuhkan:</strong> HTML harus dimulai dengan comment <code>&lt;!-- filename: nama-file --&gt;</code> pada baris pertama.<br>
+                    Aplikasi Laravel akan otomatis generate HTML dengan format ini.
+                </div>
+            </div>
+
+            <div class="file-info">
+                <strong>📋 Info File Auto-Detected:</strong>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">📁 Nama File:</div>
+                        <div class="info-value" id="detectedFilename">-</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">📄 Judul Halaman:</div>
+                        <div class="info-value" id="detectedTitle">-</div>
+                    </div>
                 </div>
             </div>
 
@@ -255,37 +325,158 @@
     </div>
 
     <script>
+        // Robust HTML content parser
+        function extractFileInfo(content) {
+            const result = {
+                filename: '',
+                title: '',
+                valid: false
+            };
+            
+            if (!content || content.trim() === '') {
+                return result;
+            }
+            
+            // Extract filename dari berbagai format comment
+            const filenamePatterns = [
+                /<!--\s*filename:\s*([a-zA-Z0-9-_]+)\s*-->/i,
+                /<!--\s*file:\s*([a-zA-Z0-9-_]+)\s*-->/i,
+                /<!--\s*name:\s*([a-zA-Z0-9-_]+)\s*-->/i
+            ];
+            
+            for (const pattern of filenamePatterns) {
+                const match = content.match(pattern);
+                if (match) {
+                    result.filename = match[1].trim();
+                    break;
+                }
+            }
+            
+            // Extract title dari <title> tag dengan berbagai format
+            const titlePatterns = [
+                /<title[^>]*>(.*?)<\/title>/is,
+                /<title[^>]*>(.*?)<\/title>/i
+            ];
+            
+            for (const pattern of titlePatterns) {
+                const match = content.match(pattern);
+                if (match) {
+                    result.title = match[1].trim().replace(/\s+/g, ' ');
+                    break;
+                }
+            }
+            
+            // Validate filename format
+            if (result.filename && /^[a-zA-Z0-9-_]+$/.test(result.filename)) {
+                result.valid = true;
+            }
+            
+            return result;
+        }
+        
+        // Update file info display dengan animasi
+        function updateFileInfo() {
+            const content = document.getElementById('content').value;
+            const { filename, title, valid } = extractFileInfo(content);
+            
+            const filenameElement = document.getElementById('detectedFilename');
+            const titleElement = document.getElementById('detectedTitle');
+            const fileInfoContainer = document.querySelector('.file-info');
+            
+            // Update filename
+            if (filename) {
+                filenameElement.textContent = filename + '.html';
+                filenameElement.className = 'info-value ' + (valid ? 'valid' : 'invalid');
+            } else {
+                filenameElement.textContent = 'Belum terdeteksi';
+                filenameElement.className = 'info-value pending';
+            }
+            
+            // Update title
+            if (title) {
+                titleElement.textContent = title;
+                titleElement.className = 'info-value valid';
+            } else {
+                titleElement.textContent = 'Belum terdeteksi';
+                titleElement.className = 'info-value pending';
+            }
+            
+            // Update container style
+            if (filename && title && valid) {
+                fileInfoContainer.className = 'file-info';
+            } else {
+                fileInfoContainer.className = 'file-info invalid';
+            }
+            
+            // Return info untuk validasi form
+            return { filename, title, valid };
+        }
+        
+        // Real-time update saat user mengetik
+        let updateTimeout;
+        document.getElementById('content').addEventListener('input', function() {
+            // Debounce untuk performa
+            clearTimeout(updateTimeout);
+            updateTimeout = setTimeout(updateFileInfo, 200);
+        });
+        
+        // Initial update
+        updateFileInfo();
+        
+        // Form submission
         document.getElementById('pageForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const token = document.getElementById('token').value;
-            const filename = document.getElementById('filename').value;
-            const title = document.getElementById('title').value;
             const content = document.getElementById('content').value;
             const submitBtn = document.getElementById('submitBtn');
             const status = document.getElementById('status');
             
+            // Get file info
+            const { filename, title, valid } = updateFileInfo();
+            
             // Validasi input
-            if (!token || !filename || !title || !content) {
-                showStatus('error', 'Semua field harus diisi!');
+            if (!token.trim()) {
+                showStatus('error', '🔑 GitHub Token harus diisi!');
                 return;
             }
             
-            // Validasi filename
-            if (!/^[a-zA-Z0-9-_]+$/.test(filename)) {
-                showStatus('error', 'Nama file hanya boleh berisi huruf, angka, tanda hubung (-) dan underscore (_)');
+            if (!content.trim()) {
+                showStatus('error', '📄 Konten HTML harus diisi!');
+                return;
+            }
+            
+            // Validasi filename dari content
+            if (!filename) {
+                showStatus('error', '❌ HTML tidak mengandung comment filename!<br><strong>Format yang dibutuhkan:</strong> <code>&lt;!-- filename: nama-file --&gt;</code> pada awal HTML');
+                return;
+            }
+            
+            if (!valid) {
+                showStatus('error', `❌ Nama file "${filename}" tidak valid!<br>Hanya boleh berisi: huruf (a-z, A-Z), angka (0-9), tanda hubung (-) dan underscore (_)`);
+                return;
+            }
+            
+            if (!title) {
+                showStatus('error', '❌ HTML tidak mengandung tag &lt;title&gt;!<br>Pastikan HTML memiliki <code>&lt;title&gt;Judul Halaman&lt;/title&gt;</code>');
+                return;
+            }
+            
+            // Validasi GitHub token format
+            if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+                showStatus('error', '🔑 Format GitHub Token tidak valid!<br>Token harus dimulai dengan <code>ghp_</code> atau <code>github_pat_</code>');
                 return;
             }
             
             // Set loading state
             submitBtn.disabled = true;
-            submitBtn.textContent = '⏳ Membuat halaman...';
-            showStatus('loading', 'Sedang membuat halaman di GitHub...');
+            submitBtn.textContent = '⏳ Mengunggah ke GitHub...';
+            showStatus('loading', '🚀 Sedang mengunggah halaman ke GitHub Pages...');
             
             try {
                 // Data untuk GitHub API
                 const fileData = {
-                    message: `Add new page: ${title}`,
+                    message: `Add/Update linktree page: ${title}`,
                     content: btoa(unescape(encodeURIComponent(content))), // Base64 encode
                     branch: 'main'
                 };
@@ -296,40 +487,50 @@
                     headers: {
                         'Authorization': `token ${token}`,
                         'Content-Type': 'application/json',
-                        'Accept': 'application/vnd.github.v3+json'
+                        'Accept': 'application/vnd.github.v3+json',
+                        'User-Agent': 'LinkMaker-BPS-Tanjungpinang'
                     },
                     body: JSON.stringify(fileData)
                 });
                 
                 if (response.ok) {
                     const result = await response.json();
-                    showStatus('success', `✅ Halaman berhasil dibuat!<br><br>
-                        <strong>File:</strong> ${filename}.html<br>
-                        <strong>URL:</strong> <a href="https://bps2172.github.io/Linktree2172/${filename}.html" target="_blank">https://bps2172.github.io/Linktree2172/${filename}.html</a><br><br>
-                        <em>Note: Mungkin butuh beberapa menit agar halaman bisa diakses.</em>`);
+                    showStatus('success', `✅ Halaman berhasil diunggah ke GitHub Pages!<br><br>
+                        <strong>📁 File:</strong> ${filename}.html<br>
+                        <strong>📄 Judul:</strong> ${title}<br>
+                        <strong>🌐 URL:</strong> <a href="https://bps2172.github.io/Linktree2172/${filename}.html" target="_blank" style="color: #007bff; text-decoration: underline;">https://bps2172.github.io/Linktree2172/${filename}.html</a><br><br>
+                        <em>⏱️ Note: Halaman akan bisa diakses dalam 2-5 menit setelah deployment GitHub selesai.</em>`);
                     
                     // Reset form
                     document.getElementById('token').value = '';
-                    document.getElementById('filename').value = '';
-                    document.getElementById('title').value = '';
+                    document.getElementById('content').value = '';
+                    updateFileInfo();
                 } else {
-                    const errorData = await response.json();
-                    let errorMessage = 'Gagal membuat halaman di GitHub.';
+                    const errorData = await response.json().catch(() => ({}));
+                    let errorMessage = 'Gagal mengunggah halaman ke GitHub.';
                     
                     if (response.status === 401) {
-                        errorMessage = 'Token GitHub tidak valid atau tidak memiliki permission yang cukup.';
+                        errorMessage = '🔐 Token GitHub tidak valid atau sudah expired.<br><strong>Solusi:</strong> Generate token baru dengan permission <code>repo</code>';
+                    } else if (response.status === 403) {
+                        errorMessage = '🚫 Token tidak memiliki permission yang cukup.<br><strong>Solusi:</strong> Pastikan token memiliki permission <code>repo</code> (Full control of private repositories)';
+                    } else if (response.status === 404) {
+                        errorMessage = '❓ Repository tidak ditemukan atau tidak bisa diakses.<br><strong>Cek:</strong> Repository <code>bps2172/Linktree2172</code> exists dan token memiliki akses';
                     } else if (response.status === 422) {
-                        errorMessage = 'File dengan nama tersebut sudah ada. Gunakan nama file yang berbeda.';
+                        errorMessage = `📁 File "${filename}.html" sudah ada dan tidak bisa diupdate.<br><strong>Solusi:</strong> Gunakan nama file berbeda atau hapus file yang sudah ada di GitHub`;
                     } else if (errorData.message) {
-                        errorMessage = errorData.message;
+                        errorMessage = `GitHub Error: ${errorData.message}`;
                     }
                     
                     showStatus('error', `❌ ${errorMessage}`);
                 }
                 
             } catch (error) {
-                console.error('Error:', error);
-                showStatus('error', `❌ Terjadi kesalahan: ${error.message}`);
+                console.error('Network Error:', error);
+                showStatus('error', `🌐 Terjadi kesalahan koneksi: ${error.message}<br><br>
+                    <strong>Kemungkinan penyebab:</strong><br>
+                    • Koneksi internet bermasalah<br>
+                    • GitHub API sedang down<br>
+                    • Browser memblokir request`);
             } finally {
                 // Reset button
                 submitBtn.disabled = false;
@@ -343,28 +544,19 @@
             status.innerHTML = message;
             status.style.display = 'block';
             
-            // Auto hide success/error messages after 10 seconds
+            // Auto hide success/error messages after 15 seconds
             if (type !== 'loading') {
                 setTimeout(() => {
-                    status.style.display = 'none';
-                }, 10000);
+                    if (status.style.display !== 'none') {
+                        status.style.opacity = '0';
+                        setTimeout(() => {
+                            status.style.display = 'none';
+                            status.style.opacity = '1';
+                        }, 300);
+                    }
+                }, 15000);
             }
         }
-        
-        // Auto-generate filename from title
-        document.getElementById('title').addEventListener('input', function(e) {
-            const title = e.target.value;
-            const filename = title
-                .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '') // Remove special characters
-                .replace(/\s+/g, '-') // Replace spaces with hyphens
-                .replace(/-+/g, '-') // Replace multiple hyphens with single
-                .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
-            
-            if (filename && !document.getElementById('filename').value) {
-                document.getElementById('filename').value = filename;
-            }
-        });
     </script>
 </body>
 </html>
