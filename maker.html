@@ -362,71 +362,7 @@
             }
         }
 
-        .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 25px;
-            background: #eaeaea;
-            border-radius: 25px;
-            cursor: pointer;
-            border: none;
-            outline: none;
-            opacity: 0;
-            transform: scale(0);
-        }
 
-        .theme-toggle::after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 21px;
-            height: 21px;
-            background: #ffffff;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .theme-toggle.active {
-            background: #ffd700;
-        }
-
-        .theme-toggle.active::after {
-            transform: translateX(25px);
-            background: #002366;
-        }
-
-        body.dark-theme {
-            background: linear-gradient(135deg, #1d4e5f 0%, #002366 50%, #1d4e5f 100%);
-        }
-
-        body.dark-theme .main-card {
-            background: rgba(0, 35, 102, 0.95);
-            color: #ffffff;
-        }
-
-        body.dark-theme .header h1,
-        body.dark-theme .form-group label,
-        body.dark-theme .info-value {
-            color: #ffffff;
-        }
-
-        body.dark-theme .form-group input,
-        body.dark-theme .form-group textarea {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            border-color: rgba(255, 215, 0, 0.3);
-        }
-
-        body.dark-theme .file-info,
-        body.dark-theme .repo-badge,
-        body.dark-theme .info-item {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 215, 0, 0.3);
-        }
 
         .morphing-shape {
             position: absolute;
