@@ -1,0 +1,248 @@
+<!-- filename: bitcoin -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin | Taut Pinang</title>
+    <meta name="description" content="Hal hal penting bitcoin">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Bitcoin">
+    <meta property="og:description" content="Hal hal penting bitcoin">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 1), rgba(34, 34, 34, 1));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        body::before {
+            background:
+                radial-gradient(circle 18px at 15% 25%, rgba(255, 215, 0, 1) 0%, transparent 60%),
+                radial-gradient(circle 14.4px at 85% 15%, rgba(180, 134, 0, 1) 0%, transparent 60%),
+                radial-gradient(circle 23.4px at 65% 75%, rgba(255, 255, 255, 1) 0%, transparent 60%),
+                radial-gradient(circle 10.8px at 25% 85%, rgba(255, 215, 0, 1) 0%, transparent 60%),
+                radial-gradient(circle 19.8px at 90% 60%, rgba(180, 134, 0, 1) 0%, transparent 60%);
+            opacity: 0.4;
+            animation: particleFloat1 2s ease-in-out infinite;
+            filter: blur(2px);
+        }
+
+        body::after {
+            background:
+                radial-gradient(circle 16.2px at 45% 65%, rgba(255, 255, 255, 1) 0%, transparent 60%),
+                radial-gradient(circle 21.6px at 5% 45%, rgba(255, 215, 0, 1) 0%, transparent 60%),
+                radial-gradient(circle 12.6px at 95% 35%, rgba(180, 134, 0, 1) 0%, transparent 60%),
+                radial-gradient(circle 18px at 75% 5%, rgba(255, 255, 255, 1) 0%, transparent 60%),
+                radial-gradient(circle 14.4px at 35% 95%, rgba(255, 215, 0, 1) 0%, transparent 60%);
+            opacity: 0.32;
+            animation: particleFloat2 2.8s ease-in-out infinite;
+            animation-delay: 0.8s;
+            filter: blur(3px);
+        }
+
+        @keyframes particleFloat1 {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+            }
+            25% {
+                transform: translateY(-20px) translateX(15px) scale(1.1);
+            }
+            50% {
+                transform: translateY(-35px) translateX(25px) scale(0.9);
+            }
+            75% {
+                transform: translateY(-15px) translateX(10px) scale(1.05);
+            }
+        }
+
+        @keyframes particleFloat2 {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+            }
+            25% {
+                transform: translateY(25px) translateX(-10px) scale(0.95);
+            }
+            50% {
+                transform: translateY(40px) translateX(-20px) scale(1.1);
+            }
+            75% {
+                transform: translateY(15px) translateX(-5px) scale(1.02);
+            }
+        }
+
+        .container {
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(0, 0, 0, 0.95));
+            backdrop-filter: blur(25px);
+            border-radius: 28px;
+            padding: 30px 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+            animation: fadeInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+            margin: 20px 0;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, rgba(255, 215, 0, 1), rgba(180, 134, 0, 1));
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 20px auto 20px;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: rgba(0, 0, 0, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px double rgba(255, 215, 0, 1);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 800;
+            color: rgba(255, 215, 0, 1);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .description {
+            color: rgba(200, 200, 200, 1);
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .link-button {
+            display: block;
+            padding: 16px 20px;
+            background: rgba(34, 34, 34, 1);
+            color: rgba(255, 215, 0, 1);
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.8);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 1), rgba(34, 34, 34, 1));
+            color: rgba(0, 0, 0, 1);
+            border: 2px solid rgba(255, 215, 0, 1);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .footer {
+            margin-top: 35px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(60, 60, 60, 1);
+            color: rgba(180, 180, 180, 1);
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+
+            .title {
+                font-size: calc(28px * 0.85);
+            }
+
+            .link-button {
+                padding: 14px 18px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/2048px-Bitcoin.svg.png" alt="Logo BPS" onerror="this.style.display='none'">
+        </div>
+        <h1 class="title">Bitcoin</h1>
+        <p class="description">Hal hal penting bitcoin</p>
+        <div class="links">
+            <a href="https://en.wikipedia.org/wiki/Bitcoin_Core" class="link-button" target="_blank" rel="noopener noreferrer">Bitcoin Core</a>
+            <a href="https://coinmarketcap.com/id/currencies/bitcoin" class="link-button" target="_blank" rel="noopener noreferrer">CoinMarketCap</a>
+            <a href="https://www.coindesk.com/" class="link-button" target="_blank" rel="noopener noreferrer">Coindesk</a>
+            <a href="https://charts.bitbo.io/price-prediction/" class="link-button" target="_blank" rel="noopener noreferrer">Price Prediction</a>
+        </div>
+        <div class="footer">
+            <p>© 2025 Taut Pinang. Semua hak dilindungi.</p>
+            <p>Karya BPS Kota Tanjungpinang</p>
+        </div>
+    </div>
+</body>
+</html>
