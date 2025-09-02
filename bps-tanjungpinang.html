@@ -4,7 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BPS Kota Tanjungpinang</title>
+    <title>BPS Kota Tanjungpinang | Taut Pinang</title>
+    <meta name="description" content="Badan Pusat Statistik Kota Tanjungpinang - Satu Data Untuk Semua">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="BPS Kota Tanjungpinang">
+    <meta property="og:description" content="Badan Pusat Statistik Kota Tanjungpinang - Satu Data Untuk Semua">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,27 +21,33 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #002366 0%, #1d4e5f 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, rgba(0, 35, 102, 1), rgba(29, 78, 95, 1));
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
+
+
 
         .container {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 24px;
-            padding: 40px 30px;
-            box-shadow: 0 20px 60px rgba(0, 35, 102, 0.3);
+            padding: 30px 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             text-align: center;
-            max-width: 400px;
+            max-width: 350px;
             width: 100%;
             animation: fadeInUp 0.6s ease-out;
             position: relative;
             overflow: hidden;
+            z-index: 10;
         }
 
         .container::before {
@@ -43,7 +57,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #ffd700, #002366, #ffd700);
+            background: linear-gradient(90deg, rgba(255, 215, 0, 1), rgba(0, 35, 102, 1));
         }
 
         @keyframes fadeInUp {
@@ -60,15 +74,15 @@
         .logo {
             width: 80px;
             height: 80px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
+            margin: 20px auto 20px;
+            border-radius: 50px;
             overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            background: #f8f9fa;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 3px solid #ffd700;
+            border: 3px solid rgba(255, 215, 0, 1);
         }
 
         .logo img {
@@ -77,85 +91,85 @@
             object-fit: cover;
         }
 
-        h1 {
+        .title {
             font-size: 26px;
             font-weight: 700;
-            color: #002366;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #002366, #1d4e5f);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: rgba(0, 35, 102, 1);
+            margin-bottom: 8px;
+            line-height: 1.3;
         }
 
         .description {
-            color: #666;
+            color: rgba(102, 102, 102, 1);
             font-size: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             line-height: 1.5;
-            min-height: 22px;
         }
 
         .links {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         .link-button {
             display: block;
-            padding: 16px 24px;
-            background: #ffffff;
-            color: #002366;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 1);
+            color: rgba(0, 35, 102, 1);
             text-decoration: none;
             border-radius: 12px;
             font-weight: 600;
             font-size: 15px;
-            border: 2px solid #eaeaea;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid rgba(234, 234, 234, 1);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         .link-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
-            background: linear-gradient(135deg, #ffd700, #ffffff);
-            color: #002366;
-            border-color: #ffd700;
-        }
-
-        .link-placeholder {
-            display: block;
-            padding: 16px 24px;
-            background: #f3f4f6;
-            color: #9ca3af;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 15px;
-            border: 2px dashed #d1d5db;
-            font-style: italic;
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 1), rgba(255, 255, 255, 1));
+            color: rgba(0, 35, 102, 1);
+            border: 2px solid rgba(255, 215, 0, 1);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
         }
 
         .footer {
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #eaeaea;
-            color: #999;
+            border-top: 1px solid rgba(238, 238, 238, 1);
+            color: rgba(153, 153, 153, 1);
             font-size: 12px;
+        }
+
+        /* 🔥 FIXED: Better QR Code styles */
+        #qr-code-container {
+            transition: all 0.3s ease !important;
+        }
+
+        #qr-code-container:hover {
+            transform: scale(1.1) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+        }
+
+        @media (max-width: 768px) {
+            #qr-code-container {
+                display: none !important;
+            }
         }
 
         @media (max-width: 480px) {
             .container {
-                padding: 30px 20px;
+                padding: 25px 20px;
             }
 
-            h1 {
-                font-size: 22px;
+            .title {
+                font-size: calc(26px * 0.85);
             }
 
             .link-button {
-                padding: 14px 20px;
+                padding: 14px 18px;
                 font-size: 14px;
             }
         }
@@ -164,17 +178,239 @@
 <body>
     <div class="container">
         <div class="logo">
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjBTTL-G6UTLmAo8oRi4G-NQs5a1_Tw845evaoPBBeu5A1lQx4LDXKXBvcRFKVtGqSqjv8LuwG1YcaDy3aiEqetz41R5B1OVJ7Tb4PbTQ3Eqs7jSH2snAQlYkNHQsiOUxkqXTLvTWsk2BP86zpMTzu7xz8sxVAoExePY-Lm5RIhoAQdKIDCPyfgTIFm/s320/GKL3_Badan%20Pusat%20Statistik%20(BPS)%20-%20Koleksilogo.com.jpg" alt="Logo BPS" onerror="this.style.display='none'">
+            <img src="http://127.0.0.1:8000/img/logo-bps.png" alt="Logo BPS" onerror="this.style.display='none'">
         </div>
-        <h1>BPS Kota Tanjungpinang</h1>
-        <p class="description">Badan Pusat Statistik Kota Tanjungpinang</p>
+        <h1 class="title">BPS Kota Tanjungpinang</h1>
+        <p class="description">Badan Pusat Statistik Kota Tanjungpinang - Satu Data Untuk Semua</p>
         <div class="links">
-            <a href="https://tanjungpinangkota.bps.go.id" class="link-button" target="_blank" rel="noopener noreferrer">🌐 Website Resmi</a>            <a href="https://tanjungpinangkota.bps.go.id/subject.html" class="link-button" target="_blank" rel="noopener noreferrer">📊 Data Statistik</a>            <a href="https://tanjungpinangkota.bps.go.id/publication.html" class="link-button" target="_blank" rel="noopener noreferrer">📝 Publikasi</a>
+            <a href="https://tanjungpinangkota.bps.go.id" class="link-button" target="_blank" rel="noopener noreferrer">Website Resmi BPS</a>
+            <a href="https://tanjungpinangkota.bps.go.id/subject.html" class="link-button" target="_blank" rel="noopener noreferrer">Data dan Statistik</a>
+            <a href="https://tanjungpinangkota.bps.go.id/news.html" class="link-button" target="_blank" rel="noopener noreferrer">Berita Resmi</a>
         </div>
         <div class="footer">
-            © 2025 BPS Kota Tanjungpinang<br>
-            <em>Dibuat dengan Tautpinang</em>
+            <p>© 2025 Taut Pinang. Semua hak dilindungi.</p>
+            <p>Karya BPS Kota Tanjungpinang</p>
         </div>
     </div>
+
+<!-- QR Code Libraries with Multiple CDN Fallbacks -->
+<script>
+// 🔥 FIXED: Multiple CDN fallback untuk QR Code library
+(function() {
+    let qrLibLoaded = false;
+    let currentCDN = 0;
+
+    const cdnList = [
+        'https://unpkg.com/qrcode@1.5.3/build/qrcode.min.js',
+        'https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js'
+    ];
+
+    function loadQRLibrary() {
+        if (currentCDN >= cdnList.length) {
+            console.warn('❌ Semua CDN QR Code gagal, menggunakan fallback API');
+            initQRCode();
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = cdnList[currentCDN];
+        script.onload = function() {
+            console.log('✅ QR Code library loaded from:', cdnList[currentCDN]);
+            qrLibLoaded = true;
+            initQRCode();
+        };
+        script.onerror = function() {
+            console.warn('⚠️ CDN gagal:', cdnList[currentCDN]);
+            currentCDN++;
+            loadQRLibrary(); // Try next CDN
+        };
+        document.head.appendChild(script);
+    }
+
+    // Start loading QR library
+    loadQRLibrary();
+
+    // Robust QR Code initialization
+    function initQRCode() {
+        // Wait for DOM to be fully loaded
+        if (document.readyState !== 'complete') {
+            window.addEventListener('load', generateQRCode);
+        } else {
+            generateQRCode();
+        }
+    }
+
+    function generateQRCode() {
+        try {
+            const qrSettings = {
+                enabled: true,
+                position: 'bottom-right',
+                size: 200,
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                borderColor: 'rgba(255, 255, 255, 0.3)',
+                borderRadius: '12',
+                padding: '10',
+                tooltipText: 'Scan QR untuk buka halaman ini',
+                darkColor: '#000000',
+                lightColor: '#FFFFFF',
+                showOnMobile: false,
+                hoverEffect: true
+            };
+
+            if (!qrSettings.enabled) return;
+
+            // Remove existing QR code if any
+            const existingQR = document.getElementById('qr-code-container');
+            if (existingQR) existingQR.remove();
+
+            const currentUrl = window.location.href;
+
+            // Create QR container
+            const qrContainer = document.createElement('div');
+            qrContainer.id = 'qr-code-container';
+            qrContainer.style.cssText = `
+                position: fixed;
+                bottom: 20px; right: 20px;
+                background: ${qrSettings.backgroundColor};
+                padding: ${qrSettings.padding}px;
+                border-radius: ${qrSettings.borderRadius}px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                z-index: 1000;
+                backdrop-filter: blur(10px);
+                border: 2px solid ${qrSettings.borderColor};
+                transition: all 0.3s ease;
+                cursor: pointer;
+                user-select: none;
+            `;
+
+            // Hide on mobile if setting is disabled
+            if (!qrSettings.showOnMobile) {
+                function toggleQRVisibility() {
+                    qrContainer.style.display = window.innerWidth <= 768 ? 'none' : 'block';
+                }
+                toggleQRVisibility();
+                window.addEventListener('resize', toggleQRVisibility);
+            }
+
+            // Try to use QRCode library, fallback to API
+            if (typeof QRCode !== 'undefined' && qrLibLoaded) {
+                console.log('📊 Generating QR with QRCode.js library');
+                const canvas = document.createElement('canvas');
+
+                QRCode.toCanvas(canvas, currentUrl, {
+                    width: qrSettings.size,
+                    height: qrSettings.size,
+                    margin: 1,
+                    color: {
+                        dark: qrSettings.darkColor,
+                        light: qrSettings.lightColor
+                    },
+                    errorCorrectionLevel: 'M'
+                }, function (error) {
+                    if (error) {
+                        console.error('QR Canvas failed:', error);
+                        createFallbackQR(qrContainer, qrSettings, currentUrl);
+                    } else {
+                        canvas.style.cssText = `display: block; width: ${qrSettings.size}px; height: ${qrSettings.size}px; border-radius: 4px;`;
+                        qrContainer.appendChild(canvas);
+                        addQRInteractions(qrContainer, qrSettings);
+                        document.body.appendChild(qrContainer);
+                        console.log('✅ QR Code berhasil dibuat dengan library');
+                    }
+                });
+            } else {
+                console.log('📊 Generating QR with fallback API');
+                createFallbackQR(qrContainer, qrSettings, currentUrl);
+            }
+
+        } catch (error) {
+            console.error('❌ Error in generateQRCode:', error);
+        }
+    }
+
+    // Fallback QR using external API
+    function createFallbackQR(container, settings, url) {
+        const img = document.createElement('img');
+
+        // Multiple API fallbacks
+        const apiList = [
+            `https://api.qrserver.com/v1/create-qr-code/?size=${settings.size}x${settings.size}&data=${encodeURIComponent(url)}&color=${settings.darkColor.replace('#', '')}&bgcolor=${settings.lightColor.replace('#', '')}`,
+            `https://chart.googleapis.com/chart?chs=${settings.size}x${settings.size}&cht=qr&chl=${encodeURIComponent(url)}`,
+            `https://quickchart.io/qr?text=${encodeURIComponent(url)}&size=${settings.size}`
+        ];
+
+        let currentAPI = 0;
+
+        function tryAPI() {
+            if (currentAPI >= apiList.length) {
+                console.error('❌ Semua API QR Code gagal');
+                container.style.display = 'none';
+                return;
+            }
+
+            img.src = apiList[currentAPI];
+            img.alt = 'QR Code';
+            img.style.cssText = `width: ${settings.size}px; height: ${settings.size}px; display: block; border-radius: 4px;`;
+
+            img.onerror = function() {
+                console.warn('⚠️ API QR failed:', apiList[currentAPI]);
+                currentAPI++;
+                tryAPI();
+            };
+
+            img.onload = function() {
+                console.log('✅ QR Code berhasil dengan API:', apiList[currentAPI]);
+                container.appendChild(img);
+                addQRInteractions(container, settings);
+                document.body.appendChild(container);
+            };
+        }
+
+        tryAPI();
+    }
+
+    // Add hover effects and tooltip
+    function addQRInteractions(container, settings) {
+        if (settings.hoverEffect) {
+            // Add tooltip
+            const tooltip = document.createElement('div');
+            tooltip.style.cssText = `
+                position: absolute;
+                bottom: 110%;
+                right: 0;
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 6px 10px;
+                border-radius: 6px;
+                font-size: 12px;
+                white-space: nowrap;
+                opacity: 0;
+                transform: translateY(10px);
+                transition: all 0.3s ease;
+                pointer-events: none;
+                z-index: 1001;
+            `;
+            tooltip.textContent = settings.tooltipText;
+            container.appendChild(tooltip);
+
+            // Hover events
+            container.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+                this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.25)';
+                tooltip.style.opacity = '1';
+                tooltip.style.transform = 'translateY(-5px)';
+            });
+
+            container.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(10px)';
+            });
+        }
+    }
+})();
+</script>
 </body>
 </html>
