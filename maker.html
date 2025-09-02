@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Page Creator - Modern Interface</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
         * {
@@ -14,7 +15,7 @@
 
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #002366 0%, #1d4e5f 50%, #002366 100%);
+            background: linear-gradient(135deg, #2d5a4a 0%, #2563eb 50%, #2d5a4a 100%);
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
@@ -32,7 +33,7 @@
 
         .particle {
             position: absolute;
-            background: #ffd700;
+            background: #f97316;
             border-radius: 50%;
             opacity: 0;
         }
@@ -55,8 +56,8 @@
             max-width: 600px;
             width: 100%;
             box-shadow: 
-                0 20px 60px rgba(0, 35, 102, 0.3),
-                0 0 0 1px rgba(255, 215, 0, 0.1);
+                0 20px 60px rgba(45, 90, 74, 0.3),
+                0 0 0 1px rgba(249, 115, 22, 0.1);
             position: relative;
             overflow: hidden;
             opacity: 0;
@@ -70,7 +71,7 @@
             left: -100%;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #ffd700, #002366, #ffd700);
+            background: linear-gradient(90deg, #f97316, #2563eb, #4a7c59);
             width: 200%;
         }
 
@@ -81,11 +82,11 @@
         }
 
         .header h1 {
-            color: #002366;
+            color: #2d5a4a;
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #002366, #1d4e5f);
+            background: linear-gradient(135deg, #2d5a4a, #2563eb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -94,18 +95,18 @@
         }
 
         .header p {
-            color: #1d4e5f;
+            color: #4a7c59;
             font-size: 1.1rem;
             opacity: 0;
             transform: translateY(20px);
         }
 
         .repo-badge {
-            background: linear-gradient(135deg, #eaeaea, #ffffff);
+            background: linear-gradient(135deg, #f0f9ff, #ffffff);
             padding: 20px;
             border-radius: 16px;
             margin-bottom: 30px;
-            border: 2px solid #ffd700;
+            border: 2px solid #f97316;
             position: relative;
             opacity: 0;
             transform: translateX(-50px) rotate(-5deg);
@@ -116,7 +117,7 @@
             position: absolute;
             top: -10px;
             right: -10px;
-            background: #ffd700;
+            background: #f97316;
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -135,7 +136,7 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            color: #002366;
+            color: #2d5a4a;
             font-weight: 600;
             font-size: 0.95rem;
         }
@@ -150,7 +151,7 @@
         .form-group textarea {
             width: 100%;
             padding: 16px 20px;
-            border: 2px solid #eaeaea;
+            border: 2px solid #e5e7eb;
             border-radius: 12px;
             font-size: 1rem;
             background: #ffffff;
@@ -162,10 +163,10 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #ffd700;
+            border-color: #f97316;
             box-shadow: 
-                0 0 0 4px rgba(255, 215, 0, 0.1),
-                0 8px 30px rgba(255, 215, 0, 0.2);
+                0 0 0 4px rgba(249, 115, 22, 0.1),
+                0 8px 30px rgba(249, 115, 22, 0.2);
         }
 
         .input-wrapper::after {
@@ -175,7 +176,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, #ffd700, #002366);
+            background: linear-gradient(90deg, #f97316, #2563eb);
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -193,11 +194,11 @@
         }
 
         .file-info {
-            background: linear-gradient(135deg, #ffffff, #eaeaea);
+            background: linear-gradient(135deg, #ffffff, #f0f9ff);
             padding: 24px;
             border-radius: 16px;
             margin-bottom: 30px;
-            border: 1px solid #eaeaea;
+            border: 1px solid #e5e7eb;
             opacity: 0;
             transform: rotateX(90deg);
             transform-origin: bottom;
@@ -214,7 +215,7 @@
             background: #ffffff;
             padding: 16px;
             border-radius: 12px;
-            border: 1px solid #eaeaea;
+            border: 1px solid #e5e7eb;
             position: relative;
             overflow: hidden;
             opacity: 0;
@@ -228,35 +229,35 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.1), transparent);
         }
 
         .info-label {
             font-size: 0.85rem;
-            color: #1d4e5f;
+            color: #4a7c59;
             margin-bottom: 4px;
             font-weight: 500;
         }
 
         .info-value {
             font-weight: 600;
-            color: #002366;
+            color: #2d5a4a;
             word-break: break-all;
             font-size: 0.95rem;
         }
 
         .info-value.detected {
-            color: #002366;
+            color: #2d5a4a;
         }
 
         .info-value.pending {
-            color: #ffd700;
+            color: #f97316;
             font-style: italic;
         }
 
         .btn {
             width: 100%;
-            background: linear-gradient(135deg, #002366, #1d4e5f);
+            background: linear-gradient(135deg, #2563eb, #4a7c59);
             color: #ffffff;
             border: none;
             padding: 18px 24px;
@@ -277,7 +278,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
             transition: left 0.6s ease;
         }
 
@@ -286,7 +287,7 @@
         }
 
         .btn:hover {
-            background: linear-gradient(135deg, #ffd700, #002366);
+            background: linear-gradient(135deg, #f97316, #2563eb);
         }
 
         .btn:disabled {
@@ -314,28 +315,118 @@
         }
 
         .status.success {
-            background: linear-gradient(135deg, #ffd700, #ffffff);
-            color: #002366;
-            border: 2px solid #ffd700;
+            background: linear-gradient(135deg, #dcfce7, #ffffff);
+            color: #166534;
+            border: 2px solid #4a7c59;
         }
 
         .status.error {
-            background: linear-gradient(135deg, #ffffff, #eaeaea);
-            color: #002366;
-            border: 2px solid #1d4e5f;
+            background: linear-gradient(135deg, #ffffff, #fef2f2);
+            color: #991b1b;
+            border: 2px solid #ef4444;
         }
 
         .status.loading {
-            background: linear-gradient(135deg, #eaeaea, #ffffff);
-            color: #1d4e5f;
-            border: 2px solid #002366;
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
+            color: #1d4ed8;
+            border: 2px solid #2563eb;
         }
 
         .help-text {
             font-size: 0.85rem;
-            color: #1d4e5f;
+            color: #4a7c59;
             margin-top: 6px;
             line-height: 1.4;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .theme-toggle::before {
+            content: '🌙';
+        }
+
+        .theme-toggle.active::before {
+            content: '☀️';
+        }
+
+        .dark-theme {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #1f2937 100%);
+        }
+
+        .dark-theme .main-card {
+            background: rgba(31, 41, 55, 0.95);
+            color: #f9fafb;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(249, 115, 22, 0.2);
+        }
+
+        .dark-theme .header h1 {
+            color: #60a5fa;
+            background: linear-gradient(135deg, #60a5fa, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .dark-theme .header p {
+            color: #9ca3af;
+        }
+
+        .dark-theme .form-group label {
+            color: #e5e7eb;
+        }
+
+        .dark-theme .form-group input,
+        .dark-theme .form-group textarea {
+            background: #374151;
+            border-color: #4b5563;
+            color: #f9fafb;
+        }
+
+        .dark-theme .form-group input:focus,
+        .dark-theme .form-group textarea:focus {
+            border-color: #f97316;
+        }
+
+        .dark-theme .file-info {
+            background: linear-gradient(135deg, #374151, #4b5563);
+            border-color: #6b7280;
+        }
+
+        .dark-theme .info-item {
+            background: #4b5563;
+            border-color: #6b7280;
+        }
+
+        .dark-theme .info-label {
+            color: #9ca3af;
+        }
+
+        .dark-theme .info-value {
+            color: #e5e7eb;
+        }
+
+        .dark-theme .help-text {
+            color: #9ca3af;
         }
 
         @media (max-width: 768px) {
@@ -362,15 +453,13 @@
             }
         }
 
-
-
         .morphing-shape {
             position: absolute;
             top: 50%;
             left: 50%;
             width: 100px;
             height: 100px;
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(249, 115, 22, 0.1);
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             transform: translate(-50%, -50%);
             opacity: 0;
@@ -420,7 +509,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #002366 0%, #1d4e5f 100%);
+            background: linear-gradient(135deg, #2d5a4a 0%, #2563eb 100%);
             margin: 0;
             padding: 20px;
             min-height: 100vh;
@@ -436,34 +525,34 @@
             max-width: 400px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 35, 102, 0.3);
+            box-shadow: 0 20px 60px rgba(45, 90, 74, 0.3);
         }
         h1 {
-            color: #002366;
+            color: #2d5a4a;
             margin-bottom: 30px;
             font-weight: 700;
-            background: linear-gradient(135deg, #002366, #1d4e5f);
+            background: linear-gradient(135deg, #2d5a4a, #2563eb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .link {
             display: block;
-            background: linear-gradient(135deg, #eaeaea, #ffffff);
-            color: #002366;
+            background: linear-gradient(135deg, #f0f9ff, #ffffff);
+            color: #2d5a4a;
             text-decoration: none;
             padding: 16px 24px;
             margin: 12px 0;
             border-radius: 12px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid #eaeaea;
+            border: 2px solid #e5e7eb;
             font-weight: 500;
         }
         .link:hover {
-            background: linear-gradient(135deg, #ffd700, #ffffff);
-            color: #002366;
+            background: linear-gradient(135deg, #f97316, #fb923c);
+            color: #ffffff;
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
-            border-color: #ffd700;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
+            border-color: #f97316;
         }
     </style>
 </head>
@@ -989,7 +1078,7 @@
                         <strong>${actionEmoji} Action:</strong> ${isUpdate ? 'Updated existing file' : 'Created new file'}<br>
                         <strong>📁 File:</strong> ${filename}.html<br>
                         <strong>📄 Judul:</strong> ${title}<br>
-                        <strong>🌐 URL:</strong> <a href="https://bps2172.github.io/TautPinang/${filename}.html" target="_blank" style="color: #007bff; text-decoration: underline;">https://bps2172.github.io/TautPinang/${filename}.html</a><br><br>
+                        <strong>🌐 URL:</strong> <a href="https://bps2172.github.io/TautPinang/${filename}.html" target="_blank" style="color: #2563eb; text-decoration: underline;">https://bps2172.github.io/TautPinang/${filename}.html</a><br><br>
                         <em>⏱️ Note: Perubahan akan terlihat dalam 2-5 menit setelah GitHub Pages deployment selesai.</em>`);
                     
                     // Success animation
