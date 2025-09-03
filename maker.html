@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Page Creator - Modern Interface</title>
+    <title>GitHub Page Creator - Enhanced Interface</title>
     <link rel="icon" href="images/favicon.png" type="image/png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
@@ -133,6 +133,10 @@
             transform: translateX(-30px);
         }
 
+        .form-group.hidden {
+            display: none;
+        }
+
         .form-group label {
             display: block;
             margin-bottom: 8px;
@@ -158,6 +162,11 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             z-index: 1;
+        }
+
+        .form-group input[type="file"] {
+            padding: 12px 16px;
+            cursor: pointer;
         }
 
         .form-group input:focus,
@@ -255,6 +264,14 @@
             font-style: italic;
         }
 
+        .image-preview {
+            max-width: 200px;
+            max-height: 150px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid #e5e7eb;
+        }
+
         .btn {
             width: 100%;
             background: linear-gradient(135deg, #2563eb, #4a7c59);
@@ -337,6 +354,23 @@
             color: #4a7c59;
             margin-top: 6px;
             line-height: 1.4;
+        }
+
+        .image-required-badge {
+            background: #fbbf24;
+            color: #78350f;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         .theme-toggle {
@@ -500,6 +534,7 @@
                     <label for="content">📄 Konten HTML dari Laravel</label>
                     <div class="input-wrapper">
                         <textarea id="content" required placeholder="Paste konten HTML lengkap dari aplikasi Laravel di sini..."><!-- filename: contoh-halaman -->
+<!-- image: true -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -535,6 +570,16 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background-image: url('logo.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            border: 3px solid #f97316;
+        }
         .link {
             display: block;
             background: linear-gradient(135deg, #f0f9ff, #ffffff);
@@ -558,7 +603,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>🏢 BPS Kota Tanjungpinang</h1>
+        <div class="logo"></div>
+        <h1>BPS Kota Tanjungpinang</h1>
         <a href="https://tanjungpinangkota.bps.go.id" class="link">🌐 Website Resmi</a>
         <a href="#" class="link">📊 Data Statistik</a>
         <a href="#" class="link">📝 Publikasi</a>
@@ -568,8 +614,21 @@
 </html></textarea>
                     </div>
                     <div class="help-text">
-                        <strong>Format yang dibutuhkan:</strong> HTML harus dimulai dengan <code>&lt;!-- filename: nama-file --&gt;</code> pada awal HTML
+                        <strong>Format yang dibutuhkan:</strong> HTML harus dimulai dengan:<br>
+                        <code>&lt;!-- filename: nama-file --&gt;</code><br>
+                        <code>&lt;!-- image: true --&gt;</code> (atau false)
                     </div>
+                </div>
+
+                <div class="form-group hidden" id="imageUploadGroup">
+                    <label for="imageFile">🖼️ Upload Logo/Image <span class="image-required-badge">REQUIRED</span></label>
+                    <div class="input-wrapper">
+                        <input type="file" id="imageFile" accept="image/*">
+                    </div>
+                    <div class="help-text">
+                        HTML dari aplikasi Taut Pinang membutuhkan gambar/logo. Upload file gambar (PNG, JPG, SVG).
+                    </div>
+                    <img id="imagePreview" class="image-preview" style="display: none;">
                 </div>
 
                 <div class="file-info">
@@ -582,6 +641,10 @@
                         <div class="info-item">
                             <div class="info-label">📄 Judul Halaman:</div>
                             <div class="info-value" id="detectedTitle">Detecting...</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">🖼️ Images Detected:</div>
+                            <div class="info-value" id="detectedImageStatus">Detecting...</div>
                         </div>
                     </div>
                 </div>
@@ -660,7 +723,7 @@
 
         // Staggered form group animations
         anime({
-            targets: '.form-group',
+            targets: '.form-group:not(.hidden)',
             opacity: [0, 1],
             translateX: [-30, 0],
             duration: 600,
@@ -778,19 +841,20 @@
             themeToggle.classList.add('active');
         }
 
-        // File info extraction and animation
+        // File info extraction from Taut Pinang comments
         function extractFileInfo(content) {
             const result = {
                 filename: '',
                 title: '',
-                valid: false
+                valid: false,
+                needsImage: false
             };
             
             if (!content || content.trim() === '') {
                 return result;
             }
             
-            // Extract filename dari berbagai format comment
+            // Extract filename dari comment
             const filenamePatterns = [
                 /<!--\s*filename:\s*([a-zA-Z0-9-_]+)\s*-->/i,
                 /<!--\s*file:\s*([a-zA-Z0-9-_]+)\s*-->/i,
@@ -805,7 +869,14 @@
                 }
             }
             
-            // Extract title dari <title> tag dengan berbagai format
+            // Extract image requirement dari comment
+            const imagePattern = /<!--\s*image:\s*(true|false)\s*-->/i;
+            const imageMatch = content.match(imagePattern);
+            if (imageMatch) {
+                result.needsImage = imageMatch[1].toLowerCase() === 'true';
+            }
+            
+            // Extract title dari <title> tag
             const titlePatterns = [
                 /<title[^>]*>(.*?)<\/title>/is,
                 /<title[^>]*>(.*?)<\/title>/i
@@ -827,13 +898,47 @@
             return result;
         }
 
+        // Show/hide image upload field with animation
+        function toggleImageUpload(show) {
+            const imageUploadGroup = document.getElementById('imageUploadGroup');
+            
+            if (show) {
+                // Show image upload field
+                imageUploadGroup.classList.remove('hidden');
+                
+                // Animate entrance
+                anime({
+                    targets: imageUploadGroup,
+                    opacity: [0, 1],
+                    translateY: [-20, 0],
+                    scale: [0.9, 1],
+                    duration: 500,
+                    easing: 'easeOutBack'
+                });
+            } else {
+                // Hide image upload field
+                anime({
+                    targets: imageUploadGroup,
+                    opacity: [1, 0],
+                    translateY: [0, -20],
+                    scale: [1, 0.9],
+                    duration: 300,
+                    easing: 'easeInQuad',
+                    complete: () => {
+                        imageUploadGroup.classList.add('hidden');
+                    }
+                });
+            }
+        }
+
         // Update file info with anime.js animations
         function updateFileInfo() {
             const content = document.getElementById('content').value;
-            const { filename, title, valid } = extractFileInfo(content);
+            const { filename, title, valid, needsImage } = extractFileInfo(content);
             
             const filenameElement = document.getElementById('detectedFilename');
             const titleElement = document.getElementById('detectedTitle');
+            const imageStatusElement = document.getElementById('detectedImageStatus');
             
             // Animate text updates
             if (filename) {
@@ -868,8 +973,53 @@
                 titleElement.className = 'info-value pending';
             }
             
-            return { filename, title, valid };
+            // Update image status
+            if (needsImage) {
+                anime({
+                    targets: imageStatusElement,
+                    scale: [1, 1.1, 1],
+                    duration: 400,
+                    easing: 'easeOutBack',
+                    complete: () => {
+                        imageStatusElement.textContent = 'Image required (true)';
+                        imageStatusElement.className = 'info-value detected';
+                    }
+                });
+                toggleImageUpload(true);
+            } else {
+                imageStatusElement.textContent = 'No image needed (false)';
+                imageStatusElement.className = 'info-value pending';
+                toggleImageUpload(false);
+            }
+            
+            return { filename, title, valid, needsImage };
         }
+
+        // Image preview functionality
+        document.getElementById('imageFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('imagePreview');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    
+                    // Animate preview entrance
+                    anime({
+                        targets: preview,
+                        opacity: [0, 1],
+                        scale: [0.8, 1],
+                        duration: 400,
+                        easing: 'easeOutBack'
+                    });
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        });
 
         // Real-time content monitoring
         let updateTimeout;
@@ -931,18 +1081,17 @@
             });
         });
 
-        // Loading spinner animation
-        function animateSpinner() {
-            const spinner = document.querySelector('.loading-spinner');
-            if (spinner) {
-                anime({
-                    targets: spinner,
-                    rotate: '1turn',
-                    duration: 1000,
-                    loop: true,
-                    easing: 'linear'
-                });
-            }
+        // Convert image to base64 for GitHub API
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const base64 = reader.result.split(',')[1]; // Remove data:image/...;base64, prefix
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
         }
 
         // Form submission with enhanced animations
@@ -951,11 +1100,11 @@
             
             const token = document.getElementById('token').value;
             const content = document.getElementById('content').value;
+            const imageFile = document.getElementById('imageFile').files[0];
             const submitBtn = document.getElementById('submitBtn');
-            const status = document.getElementById('status');
             
             // Get file info
-            const { filename, title, valid } = updateFileInfo();
+            const { filename, title, valid, needsImage } = updateFileInfo();
             
             // Validasi input
             if (!token.trim()) {
@@ -990,6 +1139,12 @@
                 return;
             }
             
+            // Validasi image jika diperlukan
+            if (needsImage && !imageFile) {
+                showStatus('error', '🖼️ HTML ini membutuhkan gambar (image: true)!<br>Silakan upload file gambar untuk digunakan sebagai logo.');
+                return;
+            }
+            
             // Validasi GitHub token format
             if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
                 showStatus('error', '🔑 Format GitHub Token tidak valid!<br>Token harus dimulai dengan <code>ghp_</code> atau <code>github_pat_</code>');
@@ -1018,6 +1173,50 @@
                     'Accept': 'application/vnd.github.v3+json',
                     'User-Agent': 'LinkMaker-BPS-Tanjungpinang'
                 };
+                
+                let processedContent = content;
+                
+                // Process image upload if exists
+                if (imageFile && needsImage) {
+                    showStatus('loading', '🖼️ Mengupload gambar...');
+                    
+                    try {
+                        const base64Image = await fileToBase64(imageFile);
+                        const imageExtension = imageFile.name.split('.').pop();
+                        const imageName = `${filename}-logo.${imageExtension}`;
+                        
+                        // Upload image to GitHub
+                        const imageData = {
+                            message: `Add image for ${title}`,
+                            content: base64Image,
+                            branch: 'main'
+                        };
+                        
+                        const imageResponse = await fetch(`https://api.github.com/repos/bps2172/TautPinang/contents/images/${imageName}`, {
+                            method: 'PUT',
+                            headers: apiHeaders,
+                            body: JSON.stringify(imageData)
+                        });
+                        
+                        if (imageResponse.ok) {
+                            // Replace image paths in HTML content
+                            const imageUrl = `images/${imageName}`;
+                            
+                            // Replace various image patterns with the uploaded image
+                            processedContent = processedContent
+                                .replace(/src\s*=\s*["']([^"']+\.(png|jpg|jpeg|gif|svg|webp))["']/gi, `src="${imageUrl}"`)
+                                .replace(/background-image\s*:\s*url\s*\(\s*["']?([^"')]+\.(png|jpg|jpeg|gif|svg|webp))["']?\s*\)/gi, `background-image: url(${imageUrl})`)
+                                .replace(/<img[^>]+>/gi, `<img src="${imageUrl}" alt="Logo">`);
+                            
+                            showStatus('loading', '✅ Gambar berhasil diupload, membuat halaman...');
+                        } else {
+                            throw new Error('Gagal mengupload gambar');
+                        }
+                    } catch (imageError) {
+                        showStatus('error', `❌ Gagal mengupload gambar: ${imageError.message}`);
+                        return;
+                    }
+                }
                 
                 let fileSha = null;
                 let isUpdate = false;
@@ -1054,7 +1253,7 @@
                 
                 const fileData = {
                     message: isUpdate ? `Update link page: ${title}` : `Add new link page: ${title}`,
-                    content: btoa(unescape(encodeURIComponent(content))), // Base64 encode
+                    content: btoa(unescape(encodeURIComponent(processedContent))), // Base64 encode
                     branch: 'main'
                 };
                 
@@ -1073,11 +1272,12 @@
                     const result = await response.json();
                     const actionText = isUpdate ? 'diperbarui' : 'dibuat';
                     const actionEmoji = isUpdate ? '📝' : '🆕';
+                    const imageText = imageFile ? '<br><strong>🖼️ Image:</strong> Uploaded and integrated' : '';
                     
                     showStatus('success', `✅ Halaman berhasil ${actionText}!<br><br>
                         <strong>${actionEmoji} Action:</strong> ${isUpdate ? 'Updated existing file' : 'Created new file'}<br>
                         <strong>📁 File:</strong> ${filename}.html<br>
-                        <strong>📄 Judul:</strong> ${title}<br>
+                        <strong>📄 Judul:</strong> ${title}${imageText}<br>
                         <strong>🌐 URL:</strong> <a href="https://bps2172.github.io/TautPinang/${filename}.html" target="_blank" style="color: #2563eb; text-decoration: underline;">https://bps2172.github.io/TautPinang/${filename}.html</a><br><br>
                         <em>⏱️ Note: Perubahan akan terlihat dalam 2-5 menit setelah GitHub Pages deployment selesai.</em>`);
                     
@@ -1092,6 +1292,8 @@
                     // Reset form
                     document.getElementById('token').value = '';
                     document.getElementById('content').value = '';
+                    document.getElementById('imageFile').value = '';
+                    document.getElementById('imagePreview').style.display = 'none';
                     updateFileInfo();
                 } else {
                     const errorData = await response.json().catch(() => ({}));
