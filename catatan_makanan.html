@@ -302,22 +302,32 @@
 
         <div class="list-section">
             <div class="list-header">
-                <h2>📝 Daftar Makanan</h2>
-                <button class="clear-btn" onclick="clearList()">🗑️ Hapus Semua</button>
+                <h2>📝 Lihat Daftar Input</h2>
             </div>
 
-            <ul class="food-list" id="foodList">
-                <div class="empty-state">
-                    <i>🍽️</i>
-                    <p>Belum ada catatan makanan.<br>Tambahkan yang pertama!</p>
+            <div style="text-align: center; padding: 40px;">
+                <p style="margin-bottom: 25px; color: #666; font-size: 1.1em;">
+                    Data tersimpan di Google Sheets. Klik tombol di bawah untuk melihat semua data yang sudah diinput.
+                </p>
+
+                <a href="https://docs.google.com/spreadsheets/d/1P8zQtsORLUM-9pB__oUtjZarYX7X79OBz-UI4PNYX1k/edit?gid=0#gid=0"
+                    target="_blank"
+                    style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #4285f4, #34a853); color: white; text-decoration: none; border-radius: 12px; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);"
+                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(66, 133, 244, 0.4)'"
+                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(66, 133, 244, 0.3)'">
+                    📊 Buka Google Sheets
+                </a>
+
+                <div style="margin-top: 20px;">
+                    <small style="color: #999;">
+                        Link akan membuka Google Sheets di tab baru
+                    </small>
                 </div>
-            </ul>
+            </div>
         </div>
     </div>
 
     <script>
-        let foodData = [];
-
         // GANTI URL INI DENGAN URL GOOGLE APPS SCRIPT ANDA
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwi9l20qOe_n013bLNNn9OHGHbMXL9aM8nb27rjBOIiHaTXUsBAW9gypiSCarwJXw6lpA/exec';
 
@@ -331,10 +341,6 @@
             const makanan = form['Makanan'].value.trim();
 
             if (nama && makanan) {
-                // Tambah ke array lokal
-                foodData.push({ nama: nama, makanan: makanan });
-                updateList();
-
                 // Update button
                 button.disabled = true;
                 button.value = '📤 Mengirim...';
@@ -382,41 +388,6 @@
             setTimeout(() => {
                 notification.remove();
             }, 4000);
-        }
-
-        function updateList() {
-            const foodList = document.getElementById('foodList');
-
-            if (foodData.length === 0) {
-                foodList.innerHTML = `
-                    <div class="empty-state">
-                        <i>🍽️</i>
-                        <p>Belum ada catatan makanan.<br>Tambahkan yang pertama!</p>
-                    </div>
-                `;
-                return;
-            }
-
-            let listHTML = '';
-            foodData.forEach((item) => {
-                listHTML += `
-                    <li class="food-item">
-                        <span class="food-content">
-                            <span class="name">${item.nama}</span> - <span class="food">${item.makanan}</span>
-                        </span>
-                    </li>
-                `;
-            });
-
-            foodList.innerHTML = listHTML;
-        }
-
-        function clearList() {
-            if (foodData.length > 0 && confirm('Yakin ingin menghapus semua catatan?')) {
-                foodData = [];
-                updateList();
-                showNotification('🗑️ Semua catatan telah dihapus', 'success');
-            }
         }
 
         // Focus saat load
