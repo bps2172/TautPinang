@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catatan Makanan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcf7f, #ffffff);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .input-section {
+            padding: 30px;
+            background: white;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 3px solid #ddd;
+            border-radius: 12px;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            background: #f9f9fa;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.2);
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #6bcf7f, #ffd93d);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(107, 207, 127, 0.3);
+        }
+
+        .add-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .list-section {
+            padding: 0 30px 30px;
+            background: white;
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f0f0f0;
+        }
+
+        .list-header h2 {
+            color: #333;
+            font-size: 1.8em;
+        }
+
+        .clear-btn {
+            padding: 8px 16px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+        }
+
+        .food-list {
+            list-style: none;
+            counter-reset: food-counter;
+        }
+
+        .food-item {
+            counter-increment: food-counter;
+            background: linear-gradient(135deg, #f8f9ff, #e8f5e8);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .food-item:nth-child(4n+1) {
+            border-left-color: #ff6b6b;
+            background: linear-gradient(135deg, #ffe8e8, #fff0f0);
+        }
+
+        .food-item:nth-child(4n+2) {
+            border-left-color: #ffd93d;
+            background: linear-gradient(135deg, #fff8e1, #fffbf0);
+        }
+
+        .food-item:nth-child(4n+3) {
+            border-left-color: #6bcf7f;
+            background: linear-gradient(135deg, #e8f5e8, #f0f9f0);
+        }
+
+        .food-item:nth-child(4n) {
+            border-left-color: #999;
+            background: linear-gradient(135deg, #f5f5f5, #fafafa);
+        }
+
+        .food-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .food-item::before {
+            content: counter(food-counter) ".";
+            font-weight: bold;
+            font-size: 1.3em;
+            color: #666;
+            margin-right: 10px;
+        }
+
+        .food-content {
+            display: inline;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .food {
+            color: #34495e;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 1.1em;
+        }
+
+        .empty-state i {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            max-width: 300px;
+        }
+
+        .notification.success {
+            background: #6bcf7f;
+        }
+
+        .notification.error {
+            background: #ff6b6b;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .input-section,
+            .list-section {
+                padding: 20px;
+            }
+
+            .notification {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍽️ Catatan Makanan</h1>
+            <p>Catat nama dan makanan favorit Anda</p>
+        </div>
+
+        <div class="input-section">
+            <form method="post" action="" name="food-form">
+                <div class="input-group">
+                    <label for="nama">👤 Nama:</label>
+                    <input type="text" name="Nama" placeholder="Masukkan nama..." required>
+                </div>
+
+                <div class="input-group">
+                    <label for="makanan">🍕 Makanan:</label>
+                    <input type="text" name="Makanan" placeholder="Masukkan makanan..." required>
+                </div>
+
+                <input type="submit" value="➕ Tambah ke Daftar" class="add-btn" id="submit">
+            </form>
+        </div>
+
+        <div class="list-section">
+            <div class="list-header">
+                <h2>📝 Daftar Makanan</h2>
+                <button class="clear-btn" onclick="clearList()">🗑️ Hapus Semua</button>
+            </div>
+
+            <ul class="food-list" id="foodList">
+                <div class="empty-state">
+                    <i>🍽️</i>
+                    <p>Belum ada catatan makanan.<br>Tambahkan yang pertama!</p>
+                </div>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let foodData = [];
+
+        // GANTI URL INI DENGAN URL GOOGLE APPS SCRIPT ANDA
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwi9l20qOe_n013bLNNn9OHGHbMXL9aM8nb27rjBOIiHaTXUsBAW9gypiSCarwJXw6lpA/exec';
+
+        const form = document.forms['food-form'];
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            const button = document.getElementById('submit');
+            const nama = form['Nama'].value.trim();
+            const makanan = form['Makanan'].value.trim();
+
+            if (nama && makanan) {
+                // Tambah ke array lokal
+                foodData.push({ nama: nama, makanan: makanan });
+                updateList();
+
+                // Update button
+                button.disabled = true;
+                button.value = '📤 Mengirim...';
+
+                // Kirim ke Google Sheets
+                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                    .then(response => {
+                        console.log('Response received:', response);
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Response data:', data);
+                        if (data.result === 'success') {
+                            showNotification('✅ Data berhasil disimpan ke Google Sheets!', 'success');
+                        } else {
+                            showNotification('❌ Error: ' + (data.error || 'Unknown error'), 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showNotification('❌ Gagal mengirim: ' + error.message, 'error');
+                    })
+                    .finally(() => {
+                        // Reset form dan button
+                        form.reset();
+                        button.disabled = false;
+                        button.value = '➕ Tambah ke Daftar';
+                        form['Nama'].focus();
+                    });
+            }
+        });
+
+        function showNotification(message, type) {
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        function updateList() {
+            const foodList = document.getElementById('foodList');
+
+            if (foodData.length === 0) {
+                foodList.innerHTML = `
+                    <div class="empty-state">
+                        <i>🍽️</i>
+                        <p>Belum ada catatan makanan.<br>Tambahkan yang pertama!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let listHTML = '';
+            foodData.forEach((item) => {
+                listHTML += `
+                    <li class="food-item">
+                        <span class="food-content">
+                            <span class="name">${item.nama}</span> - <span class="food">${item.makanan}</span>
+                        </span>
+                    </li>
+                `;
+            });
+
+            foodList.innerHTML = listHTML;
+        }
+
+        function clearList() {
+            if (foodData.length > 0 && confirm('Yakin ingin menghapus semua catatan?')) {
+                foodData = [];
+                updateList();
+                showNotification('🗑️ Semua catatan telah dihapus', 'success');
+            }
+        }
+
+        // Focus saat load
+        window.addEventListener('load', function () {
+            form['Nama'].focus();
+        });
+    </script>
+</body>
+
+</html>
